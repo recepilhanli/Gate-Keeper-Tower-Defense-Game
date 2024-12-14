@@ -46,9 +46,12 @@ namespace Game.AI
                 Tween.ShakeScale(transform, new Vector3(.4f, .4f, .4f), .35f, 5, easeBetweenShakes: Ease.OutQuart);
                 if (damageData.attacker != null)
                 {
-                    if (target == Player.localPlayerInstance) return;
-                    else if (target.CompareTag("Turret")) return;
-                    else if (damageData.attacker.CompareTag("enemy")) return;
+                    if (target != null)
+                    {
+                        if (target == Player.localPlayerInstance) return;
+                        else if (target.CompareTag("Turret")) return;
+                    }
+                    if (damageData.attacker.CompareTag("enemy")) return;
                     target = damageData.attacker;
                 }
             };

@@ -60,6 +60,8 @@ namespace Game.PlayerOperations.Skills
 
         private void SetBowlingState(bool state)
         {
+            if (state) player.ShakeCamera(.25f, 10);
+            else player.ShakeCamera(1, .35f);
             EffectManager.instance.SetEnableSpeedLines(state);
 
             Tween.StopAll(player.bowlingGameObject.transform);
@@ -80,7 +82,7 @@ namespace Game.PlayerOperations.Skills
                 player.rigidBody.velocity = player.rigidBody.velocity / 2;
                 _sequence = Sequence.Create()
                   .Group(Tween.Scale(player.bowlingGameObject.transform, endValue: 0f, duration: .5f, Ease.OutQuad))
-                  .Group(Tween.Scale(player.playerMesh.transform, endValue: 1f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
+                  .Group(Tween.Scale(player.playerMesh.transform, endValue: 0.6f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
             }
         }
 

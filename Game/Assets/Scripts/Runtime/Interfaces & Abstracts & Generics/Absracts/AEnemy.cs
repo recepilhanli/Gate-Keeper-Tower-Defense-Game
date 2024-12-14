@@ -67,8 +67,13 @@ public abstract class AEnemy : AEntity
     {
         rb.freezeRotation = true;
         LifeCycle().Forget();
+        EnemyManager.enemies.Add(this);
     }
 
+    protected virtual void OnDestroy()
+    {
+        EnemyManager.enemies.Remove(this);
+    }
 
     protected virtual bool CheckUnusualState()
     {
