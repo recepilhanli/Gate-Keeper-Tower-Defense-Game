@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6315855602468137659}
   m_Layer: 7
   m_Name: TestEnemyCube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462012493892763831}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.028653234, y: -0.99865335, z: -0.030068086, w: 0.031088706}
+  m_LocalRotation: {x: 0.028654415, y: -0.99865323, z: -0.030070513, w: 0.031087272}
   m_LocalPosition: {x: 0.90434456, y: 0.18, z: 5.7784348}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cdc57f34e627ced45a2df47ca23ebd1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

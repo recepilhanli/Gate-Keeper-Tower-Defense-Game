@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using PrimeTween;
 using UnityEngine;
 
 namespace Game.AI
@@ -14,6 +15,17 @@ namespace Game.AI
 
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
+
+        private void Start()
+        {
+            onDeath += () =>
+            {
+                Sequence.Create().OnComplete(() => Destroy(gameObject))
+                .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
+                .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
+            };
+        }
+
 
         protected override async UniTaskVoid LifeCycle()
         {
@@ -35,7 +47,7 @@ namespace Game.AI
             {
                 navMeshAgent.SetDestination(target.transform.position);
                 await UniTask.Delay(100);
-                Debug.Log("[Test] GetNearToTarget","orange");
+                Debug.Log("[Test] GetNearToTarget", "orange");
             }
         }
 
@@ -46,7 +58,7 @@ namespace Game.AI
                 if (navMeshAgent.hasPath) navMeshAgent.ResetPath();
                 target.Damage(new DamageData(_attackDamage));
                 await UniTask.WaitForSeconds(_attacRate);
-                Debug.Log("[Test] Attack","orange");
+                Debug.Log("[Test] Attack", "orange");
             }
         }
     }

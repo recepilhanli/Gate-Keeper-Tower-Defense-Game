@@ -11,6 +11,25 @@ namespace Game.PlayerOperations.Skills
     using Debug = Utils.Logger.Debug;
     public sealed class BowlingSkill : SkillInstance<BowlingSkill>
     {
+        public BowlingSkill()
+        {
+            player.onCollisionEnter += (collision) =>
+             {
+                 if (_isBowling)
+                 {
+                     if (collision.gameObject.CompareTag("Enemy"))
+                     {
+                         if (collision.gameObject.TryGetComponent(out AEnemy enemy))
+                         {
+                             enemy.Damage(new DamageData(10, player.transform.position, DamageType.Bowling));
+                             enemy.AddForce((player.transform.forward + Vector3.up) * 3);
+                         }
+                     }
+                 }
+             };
+
+
+        }
 
 
         private bool _isBowling = false;
@@ -52,7 +71,7 @@ namespace Game.PlayerOperations.Skills
                 _sequence = Sequence.Create()
                   .Group(Tween.Scale(player.bowlingGameObject.transform, endValue: 1.5f, duration: .25f, Ease.InQuad))
                   .Group(Tween.Scale(player.playerMesh.transform, endValue: 0f, duration: .25f, Ease.InQuad)).OnComplete(BowlingMovement().Forget);
-
+                Tween.LocalRotation(player.bowlingGameObject.transform, new Vector3(0, 0, 0), new Vector3(270, 0, 0), .5f, Ease.Linear, -1, CycleMode.Yoyo);
             }
             else
             {
@@ -61,6 +80,8 @@ namespace Game.PlayerOperations.Skills
                   .Group(Tween.Scale(player.bowlingGameObject.transform, endValue: 0f, duration: .5f, Ease.OutQuad))
                   .Group(Tween.Scale(player.playerMesh.transform, endValue: 1f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
             }
+
+
         }
 
         private void EnablePlayerMovement()
@@ -71,7 +92,7 @@ namespace Game.PlayerOperations.Skills
 
         private async UniTaskVoid BowlingMovement()
         {
-            Tween.LocalRotation(player.bowlingGameObject.transform, new Vector3(0, 0, 0), new Vector3(270, 0, 0), .5f, Ease.Linear, -1, CycleMode.Yoyo);
+
             var cToken = player.GetCancellationTokenOnDestroy();
             while (_isBowling && !cToken.IsCancellationRequested)
             {

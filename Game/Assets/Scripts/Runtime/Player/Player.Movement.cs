@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Game.PlayerOperations
 {
+    using Debug = Utils.Logger.Debug;
     //Player.Movement
     public partial class Player
     {
@@ -55,6 +56,26 @@ namespace Game.PlayerOperations
             }
         }
 
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            onCollisionEnter?.Invoke(collision);
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            onTriggerEnter?.Invoke(other);
+        }
+
+        public void OnCollisionExit(Collision collision)
+        {
+            onCollisionExit?.Invoke(collision);
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            onTriggerExit?.Invoke(other);
+        }
 
     }
 }

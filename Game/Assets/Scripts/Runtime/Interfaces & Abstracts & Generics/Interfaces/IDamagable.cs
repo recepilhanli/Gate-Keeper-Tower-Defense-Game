@@ -31,6 +31,7 @@ public enum DamageType
 {
     Standart,
     Wind,
+    Bowling,
     Stun
 }
 
