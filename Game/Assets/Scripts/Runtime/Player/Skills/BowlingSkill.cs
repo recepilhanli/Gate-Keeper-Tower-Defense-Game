@@ -22,7 +22,7 @@ namespace Game.PlayerOperations.Skills
                      {
                          if (collision.gameObject.TryGetComponent(out AEnemy enemy))
                          {
-                             enemy.Damage(new DamageData(player, 10, player.transform.position, DamageType.Bowling));
+                             enemy.Damage(new DamageData(player, 10, player.transform.position, DamageType.Physical));
                              enemy.AddForce((player.transform.forward + Vector3.up) * 3);
                              player.CameraImpulse(new Vector3(0, 0, 2), .2f);
                              EffectManager.instance.SetChromaticAbernationIntensity(.5f, .25f);

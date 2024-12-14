@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 namespace Game.PlayerOperations
 {
+    using System;
+    using Animations;
     using Debug = Utils.Logger.Debug;
     //Player.Movement
     public partial class Player
@@ -14,9 +16,9 @@ namespace Game.PlayerOperations
         [Header("Movement")]
         public Rigidbody rigidBody;
         public float movementSpeed = 5f;
-        public bool blockMovement = false;
+        [NonSerialized] public bool blockMovement = false;
+        [NonSerialized] public Vector3 lastMouseHitPoint;
 
-        public Vector3 lastMouseHitPoint;
 
         private void InitMovement()
         {
@@ -40,6 +42,12 @@ namespace Game.PlayerOperations
             Vector3 movement = new Vector3(input.x, rigidBody.velocity.y, input.y);
 
             rigidBody.velocity = movement;
+
+            animator.SetBool(AnimationTable.IsMoving, rigidBody.velocity.magnitude > 0.05f);
+
+            //Removed
+            // animator.SetFloat(AnimationTable.x, movementInput.x * transform.forward.x);
+            // animator.SetFloat(AnimationTable.y, movementInput.y * transform.forward.z);
         }
 
         private void Look()

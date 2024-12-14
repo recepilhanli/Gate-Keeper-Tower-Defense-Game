@@ -40,8 +40,7 @@ public struct DamageData
 public enum DamageType
 {
     Standart,
-    Wind,
-    Bowling,
+    Physical,
     Stun
 }
 

@@ -19,10 +19,17 @@ namespace Game.PlayerOperations
         {
             if (value.performed)
             {
-                 SkillDatabase.GetSkill(Skill.Bowling).UseSkill();
-                 Debug.Log("Bowling","cyan");
+                SkillDatabase.GetSkill(Skill.Bowling).UseSkill();
+                Debug.Log("Bowling", "cyan");
             }
         }
-        public void OnPunch(CallbackContext value) => Punch();
+        public void OnPunch(CallbackContext value)
+        {
+            if (value.performed)
+            {
+                Punch();
+                Debug.Log("Punch", "cyan");
+            }
+        }
     }
 }

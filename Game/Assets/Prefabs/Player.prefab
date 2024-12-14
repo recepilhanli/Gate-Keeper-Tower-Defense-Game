@@ -263,13 +263,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  animator: {fileID: 2981457944136745209}
   _playerCamera: {fileID: 0}
   _impulseSource: {fileID: 0}
   playerMesh: {fileID: 8416022966147743801}
   rigidBody: {fileID: 93044311293878481}
   movementSpeed: 10
-  blockMovement: 0
-  lastMouseHitPoint: {x: 0, y: 0, z: 0}
   bowlingGameObject: {fileID: 536134751630279378}
   directionArrow: {fileID: 6141904375111470424}
   directionArrowMaterial: {fileID: 2100000, guid: e28a89d728f15554ab61ab8b5d0d38fe,
@@ -545,7 +544,19 @@ MonoBehaviour:
     m_ActionId: ce702251-8923-4229-9b98-b348d3a83ab7
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4383635825949593099}
+        m_TargetAssemblyTypeName: Game.PlayerOperations.Player, Assembly-CSharp
+        m_MethodName: OnPunch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 11e418c1-94c8-46ad-854e-fc6d692f1232
     m_ActionName: Player/Punch[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -728,22 +739,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
         type: 3}
@@ -753,7 +764,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7be99c013068c034b9c949b84db7657d,
         type: 3}
@@ -779,6 +790,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1154742413265222713}
   m_SourcePrefab: {fileID: 100100000, guid: 7be99c013068c034b9c949b84db7657d, type: 3}
+--- !u!95 &2981457944136745209 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 7be99c013068c034b9c949b84db7657d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8649956510094933352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8416022966147743801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7be99c013068c034b9c949b84db7657d,

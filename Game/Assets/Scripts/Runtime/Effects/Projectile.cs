@@ -38,7 +38,7 @@ namespace Game.Effects
         {
             if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(new DamageData(sender, 10, transform.position, DamageType.Bowling));
+                damageable.Damage(new DamageData(sender, 10, transform.position, DamageType.Physical));
             }
 
             if (hitEffect != null)

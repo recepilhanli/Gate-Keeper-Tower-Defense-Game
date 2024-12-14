@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Animations;
 using PrimeTween;
 using UnityEngine;
 
 
 namespace Game.PlayerOperations
 {
+    using Debug = Utils.Logger.Debug;
+
     //Player.Combat 
     public partial class Player
     {
@@ -19,11 +22,35 @@ namespace Game.PlayerOperations
             onDeath += OnPlayerDeath;
 
         }
+        [Header("Combat")]
+        public List<TrailRenderer> trails = new List<TrailRenderer>();
 
 
         private void Punch()
         {
+            hasAttackedWithRightHand = !hasAttackedWithRightHand;
+            animator.SetTrigger(hasAttackedWithRightHand ? AnimationTable.Attack1 : AnimationTable.Attack2);
 
+            var hitColliders = Physics.OverlapSphere(transform.position + transform.forward, 1f);
+
+            bool wasHit = false;
+            foreach (var hitCollider in hitColliders)
+            {
+                if (!hitCollider.gameObject.CompareTag("Enemy")) continue;
+
+                if (hitCollider.TryGetComponent(out AEnemy enemy))
+                {
+                    enemy.Damage(new DamageData(this, 20, transform.position, DamageType.Physical));
+                    if (hitCollider.attachedRigidbody != null && hitCollider.attachedRigidbody.mass < 5) enemy.AddForce((transform.forward) + Vector3.up * 5);
+
+                    wasHit = true;
+                }
+
+            }
+            if (wasHit)
+            {
+                CameraImpulse(new Vector3(0, 0, 2), .2f);
+            }
         }
 
         private void OnPlayerTakeDamage(DamageData data)
