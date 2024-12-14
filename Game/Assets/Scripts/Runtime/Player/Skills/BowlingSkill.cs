@@ -21,7 +21,7 @@ namespace Game.PlayerOperations.Skills
                      {
                          if (collision.gameObject.TryGetComponent(out AEnemy enemy))
                          {
-                             enemy.Damage(new DamageData(10, player.transform.position, DamageType.Bowling));
+                             enemy.Damage(new DamageData(player, 10, player.transform.position, DamageType.Bowling));
                              enemy.AddForce((player.transform.forward + Vector3.up) * 3);
                              player.CameraImpulse(new Vector3(0, 0, 2), .2f);
                              EffectManager.instance.SetChromaticAbernationIntensity(.5f, .25f);
@@ -82,8 +82,6 @@ namespace Game.PlayerOperations.Skills
                   .Group(Tween.Scale(player.bowlingGameObject.transform, endValue: 0f, duration: .5f, Ease.OutQuad))
                   .Group(Tween.Scale(player.playerMesh.transform, endValue: 1f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
             }
-
-
         }
 
         private void EnablePlayerMovement()
@@ -102,7 +100,7 @@ namespace Game.PlayerOperations.Skills
 
             while (_isBowling && !cToken.IsCancellationRequested)
             {
-                Vector3 movement = player.transform.forward * 20f;
+                Vector3 movement = player.transform.forward * 25;
                 movement += new Vector3(0, player.rigidBody.velocity.y, 0);
 
                 //prevent shaking

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Modes;
+using Game.PlayerOperations;
 using PrimeTween;
 using UnityEngine;
 
@@ -13,15 +15,27 @@ namespace Game.AI
         [SerializeField] float _attackDamage = 5f;
         [SerializeField, Tooltip("in seconds")] float _attacRate = 1f;
 
-        private DamageType _lastDamageType = DamageType.Standart;
+        [SerializeField] private List<AEnemy> _enemiesToSpawnAfterDeath = new List<AEnemy>();
+
+
 
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
 
         private void Start()
         {
-            onDeath += () =>
+            onDeath += (reason) =>
             {
+                if (reason == DeathReason.Suicide) EffectManager.instance.CreateMagicExplosion(transform.position, 20, _attackDamage * 10);
+                else if (_enemiesToSpawnAfterDeath.Count > 0)
+                {
+                    foreach (var enemy in _enemiesToSpawnAfterDeath)
+                    {
+                        var created = Instantiate(enemy, transform.position, transform.rotation);
+                        GameManager.instance.GuideEnemy(created);
+                    }
+                }
+
                 Sequence.Create().OnComplete(() => Destroy(gameObject))
                 .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
                 .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
@@ -29,7 +43,14 @@ namespace Game.AI
 
             onTakeDamage += (damageData) =>
             {
-                _lastDamageType = damageData.damageType;
+                Tween.ShakeScale(transform, new Vector3(.4f, .4f, .4f), .35f, 5, easeBetweenShakes: Ease.OutQuart);
+                if (damageData.attacker != null)
+                {
+                    if (target == Player.localPlayerInstance) return;
+                    else if (target.CompareTag("Turret")) return;
+                    else if (damageData.attacker.CompareTag("enemy")) return;
+                    target = damageData.attacker;
+                }
             };
         }
 

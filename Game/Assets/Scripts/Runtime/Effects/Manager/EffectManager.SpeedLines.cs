@@ -8,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 //EffectManager.SpeedLines
 public partial class EffectManager
 {
+    [Header("SpeedLines")]
     public GameObject speedLinesGameObject;
 
     public void SetEnableSpeedLines(bool enable)

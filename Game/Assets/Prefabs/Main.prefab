@@ -389,6 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcessingVolume: {fileID: 3603691462721698133}
+  MagicExplosion: {fileID: 6545532731453538640, guid: a68b7e2cc4f22cd478e5c57eb0cffa1b,
+    type: 3}
   speedLinesGameObject: {fileID: 2348181750633286109}
 --- !u!1 &2348181750633286109
 GameObject:
@@ -5677,11 +5679,21 @@ PrefabInstance:
       propertyPath: _impulseSource
       value: 
       objectReference: {fileID: 2764058780755379281}
+    - target: {fileID: 4556377677431758670, guid: d4779fbdb316b7447b75065d600779e3,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4999913735833483928, guid: d4779fbdb316b7447b75065d600779e3,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 7597587510991458291}
+    - target: {fileID: 7742240939341942576, guid: d4779fbdb316b7447b75065d600779e3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 252b92677232acb489cce651ffb42939, type: 2}
     - target: {fileID: 8249954693546717754, guid: d4779fbdb316b7447b75065d600779e3,
         type: 3}
       propertyPath: m_LocalScale.y

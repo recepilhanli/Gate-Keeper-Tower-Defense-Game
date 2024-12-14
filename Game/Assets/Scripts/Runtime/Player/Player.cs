@@ -23,9 +23,13 @@ namespace Game.PlayerOperations
         private void Update()
         {
             UpdateMovement();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+               EffectManager.instance.CreateMagicExplosion(transform.position,5,10,false);
+            }
         }
 
-        
+
 
 
     }

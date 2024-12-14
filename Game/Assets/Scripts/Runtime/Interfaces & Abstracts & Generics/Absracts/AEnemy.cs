@@ -139,10 +139,10 @@ public abstract class AEnemy : AEntity
         }
     }
 
-    public override void Kill()
+    public override void Kill(DeathReason reason = DeathReason.Standart)
     {
         if (isDead) return;
         isDead = true;
-        onDeath?.Invoke();
+        onDeath?.Invoke(reason);
     }
 }
