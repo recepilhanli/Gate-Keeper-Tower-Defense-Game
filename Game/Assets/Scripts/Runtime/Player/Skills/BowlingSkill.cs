@@ -82,7 +82,7 @@ namespace Game.PlayerOperations.Skills
                 player.rigidBody.velocity = player.rigidBody.velocity / 2;
                 _sequence = Sequence.Create()
                   .Group(Tween.Scale(player.bowlingGameObject.transform, endValue: 0f, duration: .5f, Ease.OutQuad))
-                  .Group(Tween.Scale(player.playerMesh.transform, endValue: 0.6f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
+                  .Group(Tween.Scale(player.playerMesh.transform, endValue: 0.655f, duration: .5f, Ease.OutQuad)).OnComplete(EnablePlayerMovement);
             }
         }
 

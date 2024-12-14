@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Effects;
 using Game.PlayerOperations;
 using PrimeTween;
 using UnityEngine;
@@ -10,15 +11,15 @@ namespace Game.AI
     using Debug = Utils.Logger.Debug;
     public class Turret : ABuild, IMediatorReceiver<TurretPayload>
     {
+
         public static MediatorInstance<TurretMediator, TurretPayload> mediator => MediatorInstance<TurretMediator, TurretPayload>.instance;
         public Transform head;
         public List<ParticleSystem> muzzles = new List<ParticleSystem>();
-        public GameObject bulletPrefab;
+        public Projectile bulletPrefab;
         [Tooltip("In Seconds")] public float fireRate = 1f;
         public float fireDistance = 20f;
         private AEnemy _enemyFiringAt = null;
         private int _lastMuzzleFired = 0;
-
 
         private void Awake()
         {
@@ -39,7 +40,7 @@ namespace Game.AI
 
             if (_enemyFiringAt == null) //only once
             {
-                _ = Tween.LocalEulerAngles(head, Vector3.zero, new Vector3(0, 180, 0), 5f, Ease.Linear, -1, CycleMode.Yoyo);
+                RotateAround().Forget();
             }
 
             while (_enemyFiringAt == null)
@@ -72,6 +73,7 @@ namespace Game.AI
 
         private async UniTaskVoid LookAtEnemy()
         {
+
             while (_enemyFiringAt != null)
             {
                 head.LookAt(_enemyFiringAt.transform);
@@ -79,6 +81,17 @@ namespace Game.AI
             }
         }
 
+
+        private async UniTaskVoid RotateAround()
+        {
+            Vector3 startEuler = head.localEulerAngles;
+            startEuler.x = 0;
+            while (_enemyFiringAt == null)
+            {
+                head.localEulerAngles = startEuler + new Vector3(0, Mathf.Sin(Time.time) * 60, 0);
+                await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
+            }
+        }
 
 
 
@@ -100,6 +113,7 @@ namespace Game.AI
             if (_lastMuzzleFired >= muzzles.Count) _lastMuzzleFired = 0;
 
             var muzzle = muzzles[_lastMuzzleFired];
+            muzzle.Play();
             Quaternion toEnemy = Quaternion.LookRotation(_enemyFiringAt.transform.position - muzzle.transform.position);
             var bullet = Instantiate(bulletPrefab, muzzle.transform.position, toEnemy);
         }
