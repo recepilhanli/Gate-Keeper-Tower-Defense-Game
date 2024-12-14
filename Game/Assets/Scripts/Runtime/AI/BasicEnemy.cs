@@ -13,6 +13,8 @@ namespace Game.AI
         [SerializeField] float _attackDamage = 5f;
         [SerializeField, Tooltip("in seconds")] float _attacRate = 1f;
 
+        private DamageType _lastDamageType = DamageType.Standart;
+
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
 
@@ -23,6 +25,11 @@ namespace Game.AI
                 Sequence.Create().OnComplete(() => Destroy(gameObject))
                 .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
                 .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
+            };
+
+            onTakeDamage += (damageData) =>
+            {
+                _lastDamageType = damageData.damageType;
             };
         }
 

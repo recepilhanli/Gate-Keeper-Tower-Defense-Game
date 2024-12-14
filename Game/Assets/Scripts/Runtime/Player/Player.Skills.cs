@@ -11,12 +11,13 @@ namespace Game.PlayerOperations
     {
         [Header("Skill Related")]
         public GameObject bowlingGameObject;
-        public GameObject speedLines;
+        public GameObject directionArrow;
+        public Material directionArrowMaterial;
+  
 
         private void InitSkills()
         {
             SkillDatabase.LoadSkills();
-            speedLines.SetActive(false);
         }
     }
 }

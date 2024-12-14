@@ -23,6 +23,8 @@ namespace Game.PlayerOperations.Skills
                          {
                              enemy.Damage(new DamageData(10, player.transform.position, DamageType.Bowling));
                              enemy.AddForce((player.transform.forward + Vector3.up) * 3);
+                             player.CameraImpulse(new Vector3(0, 0, 2), .2f);
+                             EffectManager.instance.SetChromaticAbernationIntensity(.5f, .25f);
                          }
                      }
                  }
@@ -58,7 +60,7 @@ namespace Game.PlayerOperations.Skills
 
         private void SetBowlingState(bool state)
         {
-            player.speedLines.SetActive(state);
+            EffectManager.instance.SetEnableSpeedLines(state);
 
             Tween.StopAll(player.bowlingGameObject.transform);
             Tween.StopAll(player.playerMesh.transform);
@@ -93,7 +95,11 @@ namespace Game.PlayerOperations.Skills
         private async UniTaskVoid BowlingMovement()
         {
 
+            player.directionArrow.SetActive(true);
+            _ = Tween.ScaleZ(player.directionArrow.transform, 0, 1, .5f, Ease.InQuad);
+
             var cToken = player.GetCancellationTokenOnDestroy();
+
             while (_isBowling && !cToken.IsCancellationRequested)
             {
                 Vector3 movement = player.transform.forward * 20f;
@@ -102,11 +108,17 @@ namespace Game.PlayerOperations.Skills
                 //prevent shaking
                 float mouseDistance = Vector3.Distance(player.lastMouseHitPoint, player.transform.position);
                 mouseDistance = Mathf.Clamp(mouseDistance, 0.05f, 1);
-                movement *= mouseDistance;
 
+                //set direction arrow material (_ = for ignoring warnings)
+                _ = Tween.MaterialProperty(player.directionArrowMaterial, ShaderPorperties.alpha, mouseDistance, duration: .1f, ease: Ease.Linear);
+                _ = Tween.MaterialProperty(player.directionArrowMaterial, ShaderPorperties.speed, mouseDistance * 2.5f, duration: .1f, ease: Ease.Linear);
+
+                movement *= mouseDistance;
                 player.rigidBody.velocity = movement;
+
                 await UniTask.Yield(cToken);
             }
+            player.directionArrow.SetActive(false);
         }
     }
 }
