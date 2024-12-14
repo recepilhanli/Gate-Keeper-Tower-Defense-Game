@@ -8,7 +8,7 @@ namespace Game.PlayerOperations
     public partial class Player : AEntity
     {
         public static Player localPlayerInstance;
-
+        public GameObject playerMesh;
 
         private void Awake()
         {
