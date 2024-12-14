@@ -84,7 +84,7 @@ MonoBehaviour:
   muzzles:
   - {fileID: 8619426398138580885}
   - {fileID: 6541132702437662241}
-  bulletPrefab: {fileID: 7416690067498185470, guid: 09a7339aa64f3c349a89a0042fb93593,
+  bulletPrefab: {fileID: 1800806269380707742, guid: 09a7339aa64f3c349a89a0042fb93593,
     type: 3}
   fireRate: 0.5
   fireDistance: 20

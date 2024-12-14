@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 917738707}
   - component: {fileID: 917738706}
   - component: {fileID: 917738705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
