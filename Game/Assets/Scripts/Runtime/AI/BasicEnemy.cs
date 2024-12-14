@@ -27,15 +27,19 @@ namespace Game.AI
             onDeath += (reason) =>
             {
                 if (reason == DeathReason.Suicide) EffectManager.instance.CreateMagicExplosion(transform.position, 20, _attackDamage * 10);
-                else if (_enemiesToSpawnAfterDeath.Count > 0)
+                else
                 {
-                    foreach (var enemy in _enemiesToSpawnAfterDeath)
-                    {
-                        var created = Instantiate(enemy, transform.position, transform.rotation);
-                        GameManager.instance.GuideEnemy(created);
-                    }
-                }
 
+                    if (_enemiesToSpawnAfterDeath.Count > 0)
+                    {
+                        foreach (var enemy in _enemiesToSpawnAfterDeath)
+                        {
+                            var created = Instantiate(enemy, transform.position, transform.rotation);
+                            GameManager.instance.GuideEnemy(created);
+                        }
+                    }
+                    EffectManager.instance.CreatePuffEffect(transform.position);
+                }
                 Sequence.Create().OnComplete(() => Destroy(gameObject))
                 .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
                 .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
@@ -77,7 +81,7 @@ namespace Game.AI
 
         private async UniTask GetNearToTarget()
         {
-            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) > navMeshAgent.stoppingDistance + .2f)
+            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) > navMeshAgent.stoppingDistance + .3f)
             {
                 navMeshAgent.SetDestination(target.transform.position);
                 await UniTask.Delay(100);
@@ -87,7 +91,7 @@ namespace Game.AI
 
         private async UniTask Attack()
         {
-            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) <= navMeshAgent.stoppingDistance + .2f)
+            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) <= navMeshAgent.stoppingDistance + .3f)
             {
                 if (navMeshAgent.hasPath) navMeshAgent.ResetPath();
                 target.Damage(new DamageData(_attackDamage));

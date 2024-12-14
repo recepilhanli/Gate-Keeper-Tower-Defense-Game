@@ -25,6 +25,7 @@ namespace Game.AI
                 currentLevel++;
                 turretLevels[currentLevel].gameObject.SetActive(true);
                 turretLevels[currentLevel - 1].gameObject.SetActive(false);
+                EffectManager.instance.CreatePuffEffect(turretLevels[currentLevel].transform.position + Vector3.up * 2, 3);
             }
 
         }

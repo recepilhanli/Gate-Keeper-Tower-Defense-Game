@@ -10,6 +10,7 @@ namespace Game.Modes
         private bool isGameStarted = false;
 
         public int score = 0;
+        public int currency = 0;
 
         [ContextMenu("Start Game")]
         public void StartGame()

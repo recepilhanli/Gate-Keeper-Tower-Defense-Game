@@ -45,6 +45,7 @@ namespace Game.Modes
 
         public override void InitGameMode()
         {
+            GameManager.instance.score = 1;
             _pause = true;
             wave = 0;
             Wave().Forget();
@@ -59,6 +60,7 @@ namespace Game.Modes
 
         public override void Success()
         {
+            GameManager.instance.score ++;
             _pause = true;
             wave++;
             Wave().Forget();

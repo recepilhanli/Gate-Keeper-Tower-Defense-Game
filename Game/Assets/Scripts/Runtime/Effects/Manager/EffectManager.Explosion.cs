@@ -24,10 +24,11 @@ public partial class EffectManager
         Destroy(explosion.gameObject, 3);
     }
 
-    public void CreatePuffEffect(Vector3 position)
+    public void CreatePuffEffect(Vector3 position,float uniformScale = 1)
     {
         var puff = Instantiate(puffEffect, position, Quaternion.identity);
         puff.SetActive(true);
+        puff.transform.localScale = Vector3.one * uniformScale;
         Destroy(puff, 3);
     }
 }

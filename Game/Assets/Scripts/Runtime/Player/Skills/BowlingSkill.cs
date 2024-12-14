@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
+using Game.Modes;
 using PrimeTween;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ namespace Game.PlayerOperations.Skills
                              enemy.AddForce((player.transform.forward + Vector3.up) * 3);
                              player.CameraImpulse(new Vector3(0, 0, 2), .2f);
                              EffectManager.instance.SetChromaticAbernationIntensity(.5f, .25f);
+                             GameManager.instance.currency += 10;
                          }
                      }
                  }
