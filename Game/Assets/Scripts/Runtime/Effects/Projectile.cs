@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Utils;
@@ -17,6 +18,7 @@ namespace Game.Effects
         public Rigidbody rb;
         public GameObject hitEffect;
         private float _destroyTime = 0f;
+        [NonSerialized] public AEntity sender = null;
 
 
         private void OnEnable()
@@ -35,7 +37,7 @@ namespace Game.Effects
         {
             if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(new DamageData(null, 10, transform.position, DamageType.Bowling));
+                damageable.Damage(new DamageData(sender, 10, transform.position, DamageType.Bowling));
             }
 
             if (hitEffect != null)

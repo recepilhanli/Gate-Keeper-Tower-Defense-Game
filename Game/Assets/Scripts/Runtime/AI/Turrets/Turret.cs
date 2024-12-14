@@ -116,6 +116,7 @@ namespace Game.AI
             muzzle.Play();
             Quaternion toEnemy = Quaternion.LookRotation(_enemyFiringAt.transform.position - muzzle.transform.position);
             var bullet = Instantiate(bulletPrefab, muzzle.transform.position, toEnemy);
+            bullet.sender = this;
         }
 
         public void OnReceiveMessage(TurretPayload payload)
