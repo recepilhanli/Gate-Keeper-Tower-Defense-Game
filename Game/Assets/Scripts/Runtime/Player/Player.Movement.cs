@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using PrimeTween;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+
+namespace Game.PlayerOperations
+{
+    //Player.Movement
+    public partial class Player
+    {
+        [Header("Movement")]
+        public Rigidbody rigidBody;
+        public float movementSpeed = 5f;
+
+        private void InitMovement()
+        {
+            rigidBody.sleepThreshold = 0f;
+            rigidBody.freezeRotation = true;
+            PrimeTweenConfig.warnEndValueEqualsCurrent = false;
+        }
+
+        private void UpdateMovement()
+        {
+            Move();
+            Look();
+        }
+
+
+        private void Move()
+        {
+            Vector2 input = movementInput * movementSpeed;
+            Vector3 movement = new Vector3(input.x, rigidBody.velocity.y, input.y);
+
+            rigidBody.velocity = movement;
+        }
+
+        private void Look()
+        {
+            //looking at mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 lookAt = hit.point;
+                lookAt.y = transform.position.y;
+                var rot = Quaternion.LookRotation(lookAt - transform.position);
+                Tween.Rotation(transform, rot, 0.1f);
+            }
+        }
+
+
+    }
+}

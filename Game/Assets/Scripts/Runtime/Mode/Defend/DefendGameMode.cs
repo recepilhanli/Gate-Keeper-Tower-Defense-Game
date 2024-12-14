@@ -1,0 +1,125 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+namespace Game.Modes
+{
+    [CreateAssetMenu(fileName = "DefendGameMode", menuName = "Game/Modes/Defend Game Mode")]
+    public class DefendGameMode : AGameMode
+    {
+        [NonSerialized] public int wave = 0;
+
+
+        [SerializeField] private List<EnemySpawn> _enemySpawns = new List<EnemySpawn>();
+        [SerializeField, Tooltip("if some enemies failed to spawn, this will be spawned instead")] private AEnemy _defaultEnemy;
+        [SerializeField, Tooltip("Time between waves (seconds)")] private float _pauseTime = 10;
+        [SerializeField, Tooltip("Wave's Duration (seconds)")] private float _waveDuration = 60;
+        [SerializeField, Tooltip("min time between enemies (seconds)")] private float _minTimeBetweenEnemies = .25f;
+        [SerializeField, Tooltip("max time between enemies (seconds)")] private float _maxTimeBetweenEnemies = 1f;
+        [SerializeField] private int enemyCount = 10;
+        [SerializeField, Tooltip("Changes number of enemies for per wave. (Wave * enemySpawnMultiplier)")] private float _enemMultiplier = 1.1f;
+
+        private int _enemyCount = 0;
+        private bool _pause = false;
+        private List<EnemySpawn> _enemySpawnsForCurrentWave = new List<EnemySpawn>();
+
+
+        private Vector3 FindRandomSpawnPoint()
+        {
+            return Vector3.zero;
+        }
+
+        #region Abstract Methods
+        public override void GameModeUpdate()
+        {
+            if (_pause) return;
+
+            _waveDuration -= Time.deltaTime;
+            if (_waveDuration <= 0 && _enemyCount == 0)
+            {
+                Success();
+            }
+        }
+
+        public override void InitGameMode()
+        {
+            _pause = true;
+            wave = 0;
+            Wave().Forget();
+        }
+
+        public override void Fail()
+        {
+            _pause = true;
+            wave = 0;
+
+        }
+
+        public override void Success()
+        {
+            _pause = true;
+            wave++;
+            Wave().Forget();
+        }
+        #endregion
+
+        private async UniTaskVoid Wave()
+        {
+            _enemyCount = 0;
+            await UniTask.WaitForSeconds(_pauseTime);
+
+            _enemySpawnsForCurrentWave.Clear();
+
+            foreach (var spawn in _enemySpawns)
+            {
+                if (spawn.minWave <= wave)
+                {
+                    _enemySpawnsForCurrentWave.Add(spawn);
+                }
+            }
+
+            _pause = false;
+
+            int enemyCount = (int)(this.enemyCount * Mathf.Pow(_enemMultiplier, wave));
+            for (int i = 0; i < this.enemyCount; i++)
+            {
+                await SpawnRandomEnemy();
+            }
+        }
+
+        private async UniTask SpawnRandomEnemy()
+        {
+            await UniTask.WaitForSeconds(UnityEngine.Random.Range(_minTimeBetweenEnemies, _maxTimeBetweenEnemies));
+            var prefab = _defaultEnemy;
+
+            if (_enemySpawnsForCurrentWave.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, _enemySpawnsForCurrentWave.Count);
+                if (UnityEngine.Random.value <= _enemySpawnsForCurrentWave[index].spawnRatio)
+                {
+                    prefab = _enemySpawnsForCurrentWave[index].enemyPrefab;
+                }
+            }
+
+            var enemy = Instantiate(prefab, FindRandomSpawnPoint(), Quaternion.identity);
+            enemy.onDeath += DecreaseEnemyCount;
+            enemy.target = DefendingObject.instance;
+            _enemyCount++;
+        }
+
+        private void DecreaseEnemyCount() => _enemyCount--;
+    }
+
+    [Serializable]
+    struct EnemySpawn
+    {
+#if UNITY_EDITOR
+        public string name; //only for editor
+#endif
+        public AEnemy enemyPrefab;
+        public int minWave;
+        [Range(0, 1)] public float spawnRatio;
+    }
+}
