@@ -1172,6 +1172,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5885607587175634181, guid: a3c1e8f2a67947843b86a30712e3e5e2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.762816
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885607587175634181, guid: a3c1e8f2a67947843b86a30712e3e5e2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0005228715
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885607587175634181, guid: a3c1e8f2a67947843b86a30712e3e5e2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.64661515
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885607587175634181, guid: a3c1e8f2a67947843b86a30712e3e5e2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00061683485
+      objectReference: {fileID: 0}
     - target: {fileID: 6016084746415913033, guid: a3c1e8f2a67947843b86a30712e3e5e2,
         type: 3}
       propertyPath: m_Name
@@ -1263,6 +1283,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1481185918408656527, guid: 5722930fac1aa8f4abfe84aef9818c9d,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 3762245758447589877, guid: 5722930fac1aa8f4abfe84aef9818c9d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1343,6 +1368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7597587510991458291, guid: 5722930fac1aa8f4abfe84aef9818c9d,
+        type: 3}
+      propertyPath: field of view
+      value: 65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
