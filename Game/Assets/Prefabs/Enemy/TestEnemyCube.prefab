@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cdc57f34e627ced45a2df47ca23ebd1f, type: 2}
+  - {fileID: 2100000, guid: e41d2161c3606ea4e8fed449b066d642, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7b035f5ed71f747a07ad125f8076fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 500
   navMeshAgent: {fileID: 6315855602468137659}
   rb: {fileID: 4625264690913688819}
   target: {fileID: 0}
