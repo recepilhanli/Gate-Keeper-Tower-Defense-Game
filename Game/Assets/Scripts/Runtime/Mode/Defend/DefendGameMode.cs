@@ -22,7 +22,7 @@ namespace Game.Modes
         [SerializeField, Tooltip("Changes number of enemies for per wave. (Wave * enemySpawnMultiplier)")] private float _enemMultiplier = 1.1f;
 
         private int _enemyCount = 0;
-        private bool _pause = false;
+        private bool _pause = true;
         private List<EnemySpawn> _enemySpawnsForCurrentWave = new List<EnemySpawn>();
 
 
@@ -109,7 +109,13 @@ namespace Game.Modes
             _enemyCount++;
         }
 
-        private void DecreaseEnemyCount() => _enemyCount--;
+        private void DecreaseEnemyCount(DeathReason reason) => _enemyCount--;
+
+        public override void GuideEnemy(AEnemy enemy)
+        {
+            if(_pause) return;
+            enemy.target = DefendingObject.instance;
+        }
     }
 
     [Serializable]

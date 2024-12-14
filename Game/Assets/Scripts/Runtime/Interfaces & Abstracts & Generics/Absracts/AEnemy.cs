@@ -5,6 +5,7 @@ using PrimeTween;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Debug = Game.Utils.Logger.Debug;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(NavMeshAgent))]
 public abstract class AEnemy : AEntity
@@ -43,18 +44,20 @@ public abstract class AEnemy : AEntity
         get => _isPhysical;
         protected set
         {
-            bool isChanged = _isPhysical != value;
             _physicalTime = Time.timeSinceLevelLoad;
+            bool hasChanged = _isPhysical != value;
+            if (!hasChanged) return;
+
             _isPhysical = value;
             rb.isKinematic = !value;
             navMeshAgent.enabled = !value;
 
-            if (value && isChanged)
+            if (value)
             {
                 GroundChecker().Forget();
                 onBecomePhysical?.Invoke();
             }
-            else if (isChanged) onBecomeAgent?.Invoke();
+            else onBecomeAgent?.Invoke();
         }
     }
 
@@ -64,12 +67,28 @@ public abstract class AEnemy : AEntity
     {
         rb.freezeRotation = true;
         LifeCycle().Forget();
+        EnemyManager.enemies.Add(this);
     }
 
-    
+    protected virtual void OnDestroy()
+    {
+        EnemyManager.enemies.Remove(this);
+    }
+
     protected virtual bool CheckUnusualState()
     {
         return !isPhysical;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && _physicalTime + .25f < Time.timeSinceLevelLoad && _isPhysical && !isDead)
+        {
+            isPhysical = false;
+            Debug.Log("Grounded");
+        }
+
+
     }
 
 
@@ -89,8 +108,8 @@ public abstract class AEnemy : AEntity
 
     private async UniTaskVoid GroundChecker()
     {
-
-        while (_isPhysical)
+        await UniTask.Delay(1000);
+        while (_isPhysical && !isDead)
         {
             if (Time.timeSinceLevelLoad - _physicalTime > MAXIMUM_PHYSICAL_TIME)
             {
@@ -104,18 +123,31 @@ public abstract class AEnemy : AEntity
                 {
                     isPhysical = false;
                 }
-
-                await UniTask.Delay(200);
             }
 
+            await UniTask.Delay(200);
+
+            Debug.Log("GroundChecker");
         }
     }
 
 
-    public override void Kill()
+    public override void Damage(DamageData data)
+    {
+        if (isDead) return;
+
+        health -= data.damage;
+        onTakeDamage?.Invoke(data);
+        if (health <= 0)
+        {
+            Kill();
+        }
+    }
+
+    public override void Kill(DeathReason reason = DeathReason.Standart)
     {
         if (isDead) return;
         isDead = true;
-        onDeath?.Invoke();
+        onDeath?.Invoke(reason);
     }
 }

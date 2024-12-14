@@ -8,5 +8,6 @@ public abstract class AGameMode : ScriptableObject
     public abstract void InitGameMode();
     public abstract void Success();
     public abstract void Fail();
+    public abstract void GuideEnemy(AEnemy enemy); // Get Info for the enemy
 }
 

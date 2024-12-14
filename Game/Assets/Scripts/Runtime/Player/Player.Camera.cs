@@ -18,6 +18,7 @@ namespace Game.PlayerOperations
         private void InitCamera()
         {
             _noise = _playerCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            ShakeCamera(1, .35f);
         }
 
         public void CameraImpulse(Vector3 velocity, float duration)
@@ -32,7 +33,7 @@ namespace Game.PlayerOperations
             _noise.m_AmplitudeGain = amplitudeGain;
             _noise.m_FrequencyGain = frequencyGain;
         }
- 
+
 
 
     }

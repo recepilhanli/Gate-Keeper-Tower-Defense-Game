@@ -10,13 +10,13 @@ namespace Game.Modes
         void Start()
         {
             onTakeDamage += OnGateTakeDamage;
-            onDeath += OnGateDestroyed;
+            onDeath += (reason) => { OnGateDestroyed(); };
         }
 
         private void OnGateTakeDamage(DamageData data)
         {
-            Vector3 strength = new Vector3(.2f, .2f, .2f);
-            Tween.ShakeScale(transform, strength, .2f, 5, easeBetweenShakes: Ease.OutQuart);
+            Vector3 strength = new Vector3(.5f, .3f, .2f);
+            Tween.ShakeScale(transform, strength, .3f, 5, easeBetweenShakes: Ease.OutQuart);
         }
 
         private void OnGateDestroyed()

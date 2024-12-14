@@ -7,12 +7,16 @@ using UnityEngine.InputSystem;
 
 namespace Game.PlayerOperations
 {
+    using Debug = Utils.Logger.Debug;
     //Player.Movement
     public partial class Player
     {
         [Header("Movement")]
         public Rigidbody rigidBody;
         public float movementSpeed = 5f;
+        public bool blockMovement = false;
+
+        public Vector3 lastMouseHitPoint;
 
         private void InitMovement()
         {
@@ -30,6 +34,8 @@ namespace Game.PlayerOperations
 
         private void Move()
         {
+            if (blockMovement) return;
+
             Vector2 input = movementInput * movementSpeed;
             Vector3 movement = new Vector3(input.x, rigidBody.velocity.y, input.y);
 
@@ -46,9 +52,30 @@ namespace Game.PlayerOperations
                 lookAt.y = transform.position.y;
                 var rot = Quaternion.LookRotation(lookAt - transform.position);
                 Tween.Rotation(transform, rot, 0.1f);
+                lastMouseHitPoint = hit.point;
             }
         }
 
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            onCollisionEnter?.Invoke(collision);
+        }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            onTriggerEnter?.Invoke(other);
+        }
+
+        public void OnCollisionExit(Collision collision)
+        {
+            onCollisionExit?.Invoke(collision);
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            onTriggerExit?.Invoke(other);
+        }
 
     }
 }

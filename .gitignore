@@ -74,3 +74,5 @@ crashlytics-build.properties
 
 # More
 EditorUserSettings.asset
+/Game/Assets/Extra/VarietyFX/*
+/Game/Assets/Extra/VFX_Klaus/*

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Modes;
+using Game.PlayerOperations;
+using PrimeTween;
 using UnityEngine;
 
 namespace Game.AI
@@ -12,8 +15,51 @@ namespace Game.AI
         [SerializeField] float _attackDamage = 5f;
         [SerializeField, Tooltip("in seconds")] float _attacRate = 1f;
 
+        [SerializeField] private List<AEnemy> _enemiesToSpawnAfterDeath = new List<AEnemy>();
+
+
+
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
+
+        private void Start()
+        {
+            onDeath += (reason) =>
+            {
+                if (reason == DeathReason.Suicide) EffectManager.instance.CreateMagicExplosion(transform.position, 20, _attackDamage * 10);
+                else if (_enemiesToSpawnAfterDeath.Count > 0)
+                {
+                    foreach (var enemy in _enemiesToSpawnAfterDeath)
+                    {
+                        var created = Instantiate(enemy, transform.position, transform.rotation);
+                        GameManager.instance.GuideEnemy(created);
+                    }
+                }
+
+                Sequence.Create().OnComplete(() => Destroy(gameObject))
+                .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
+                .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
+            };
+
+            onTakeDamage += (damageData) =>
+            {
+                Tween.ShakeScale(transform, new Vector3(.4f, .4f, .4f), .35f, 5, easeBetweenShakes: Ease.OutQuart);
+                if (damageData.attacker != null)
+                {
+                    if (target != null)
+                    {
+                        if (target == Player.localPlayerInstance) return;
+                        else if (target.CompareTag("Turret")) return;
+                    }
+                    if (damageData.attacker.CompareTag("Enemy")) return;
+                    target = damageData.attacker;
+
+                    if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 1.5f;
+                    else navMeshAgent.stoppingDistance = 3.5f;
+                }
+            };
+        }
+
 
         protected override async UniTaskVoid LifeCycle()
         {
@@ -35,7 +81,7 @@ namespace Game.AI
             {
                 navMeshAgent.SetDestination(target.transform.position);
                 await UniTask.Delay(100);
-                Debug.Log("[Test] GetNearToTarget","orange");
+                Debug.Log("[Test] GetNearToTarget", "orange");
             }
         }
 
@@ -46,7 +92,7 @@ namespace Game.AI
                 if (navMeshAgent.hasPath) navMeshAgent.ResetPath();
                 target.Damage(new DamageData(_attackDamage));
                 await UniTask.WaitForSeconds(_attacRate);
-                Debug.Log("[Test] Attack","orange");
+                Debug.Log("[Test] Attack", "orange");
             }
         }
     }

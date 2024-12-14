@@ -31,7 +31,7 @@ namespace Game.PlayerOperations
             Tween.ShakeScale(transform, new Vector3(.2f, .2f, .2f), .2f, 5, easeBetweenShakes: Ease.OutQuart);
         }
 
-        private void OnPlayerDeath()
+        private void OnPlayerDeath(DeathReason reason = DeathReason.Standart)
         {
 
         }

@@ -35,5 +35,7 @@ namespace Game.Modes
             gameMode.Fail();
         }
         public void Success() => gameMode.Success();
+
+        public void GuideEnemy(AEnemy enemy) => gameMode.GuideEnemy(enemy);
     }
 }

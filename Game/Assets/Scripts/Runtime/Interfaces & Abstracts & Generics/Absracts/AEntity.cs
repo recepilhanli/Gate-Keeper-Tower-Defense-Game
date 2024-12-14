@@ -6,10 +6,10 @@ using UnityEngine.Events;
 /// <summary>
 /// ACharacter is an abstract class that represents a character in the game.
 /// </summary>
-public abstract class AEntity : MonoBehaviour, IDamagable
+public abstract class AEntity : MonoBehaviour, IDamageable
 {
     public UnityAction<DamageData> onTakeDamage;
-    public UnityAction onDeath;
+    public UnityAction<DeathReason> onDeath;
 
 
     public float health = 100;
@@ -23,10 +23,8 @@ public abstract class AEntity : MonoBehaviour, IDamagable
         }
     }
 
-    public virtual void Kill()
+    public virtual void Kill(DeathReason reason = DeathReason.Standart)
     {
-        onDeath?.Invoke();
+        onDeath?.Invoke(reason);
     }
-
-
 }
