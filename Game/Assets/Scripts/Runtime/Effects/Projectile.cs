@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Game.Effects
 {
+    using Debug = Utils.Logger.Debug;
     //Object Pooling Design Pattern Will be implemented here.....
     public class Projectile : MonoBehaviour
     {
@@ -46,6 +47,7 @@ namespace Game.Effects
                 var rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
                 var contactPos = contact.point;
                 var effect = Instantiate(hitEffect, contactPos, transform.rotation);
+                Debug.Log($"Hit: {collision.gameObject.name}");
                 Destroy(effect, 1.5f);
             }
 

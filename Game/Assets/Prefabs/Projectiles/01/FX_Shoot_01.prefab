@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8351622831618006893}
   - component: {fileID: 3922282525590013457}
   - component: {fileID: 1800806269380707742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FX_Shoot_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FX_Shoot_01_projectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 946230873439750309, guid: 36ba956664d8c524483e29bd15b0527d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 946230873439750310, guid: 36ba956664d8c524483e29bd15b0527d,
         type: 3}

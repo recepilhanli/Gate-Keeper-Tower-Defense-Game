@@ -51,8 +51,11 @@ namespace Game.AI
                         if (target == Player.localPlayerInstance) return;
                         else if (target.CompareTag("Turret")) return;
                     }
-                    if (damageData.attacker.CompareTag("enemy")) return;
+                    if (damageData.attacker.CompareTag("Enemy")) return;
                     target = damageData.attacker;
+
+                    if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 1.5f;
+                    else navMeshAgent.stoppingDistance = 3.5f;
                 }
             };
         }

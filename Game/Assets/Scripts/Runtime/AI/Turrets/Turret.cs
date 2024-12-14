@@ -23,6 +23,13 @@ namespace Game.AI
 
         private void Awake()
         {
+            onTakeDamage += (data) =>
+            {
+                Tween.ShakeScale(transform, new Vector3(.3f,.3f,.3f), .1f);
+
+            };
+
+
             LifeCycle().Forget();
         }
 

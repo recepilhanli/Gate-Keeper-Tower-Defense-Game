@@ -2,92 +2,96 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretMediator : MediatorInstance<TurretMediator, TurretPayload>
+namespace Game.AI
 {
 
-    public TurretMediator()
+    public class TurretMediator : MediatorInstance<TurretMediator, TurretPayload>
     {
 
-        EnemyManager.enemies.OnRemove += OnEnemyRemovedFromScene;
-    }
-
-    private List<FiringTurret> _firingTurets = new List<FiringTurret>();
-
-    private void OnEnemyRemovedFromScene(AEnemy enemy)
-    {
-        for (int i = 0; i < _firingTurets.Count; i++)
+        public TurretMediator()
         {
-            if (_firingTurets[i].enemyFiringAt == enemy)
+
+            EnemyManager.enemies.OnRemove += OnEnemyRemovedFromScene;
+        }
+
+        private List<FiringTurret> _firingTurets = new List<FiringTurret>();
+
+        private void OnEnemyRemovedFromScene(AEnemy enemy)
+        {
+            for (int i = 0; i < _firingTurets.Count; i++)
             {
-                _firingTurets.RemoveAt(i);
-                i--;
+                if (_firingTurets[i].enemyFiringAt == enemy)
+                {
+                    _firingTurets.RemoveAt(i);
+                    i--;
+                }
             }
         }
-    }
 
-    private void OnEnemyAddedToScene(AEnemy enemy)
-    {
-
-    }
-
-    protected override void OnReceivePayload(IMediatorReceiver<TurretPayload> sender, TurretPayload payload)
-    {
-        if (payload.enemyToFireAt != null && IsEnemyOnFire(payload.enemyToFireAt))
+        private void OnEnemyAddedToScene(AEnemy enemy)
         {
-            if (_firingTurets.Count >= EnemyManager.enemies.Count)
+
+        }
+
+        protected override void OnReceivePayload(IMediatorReceiver<TurretPayload> sender, TurretPayload payload)
+        {
+            if (payload.enemyToFireAt != null && IsEnemyOnFire(payload.enemyToFireAt))
+            {
+                if (_firingTurets.Count >= EnemyManager.enemies.Count)
+                {
+                    ApproveFiring(sender, payload);
+                    return;
+                }
+                else
+                {
+                    var rand = Random.Range(0, EnemyManager.enemies.Count);
+                    payload.enemyToFireAt = EnemyManager.enemies[rand];
+                    ApproveFiring(sender, payload);
+                }
+
+            }
+            else if (payload.enemyToFireAt != null)
             {
                 ApproveFiring(sender, payload);
                 return;
             }
-            else
-            {
-                var rand = Random.Range(0, EnemyManager.enemies.Count);
-                payload.enemyToFireAt = EnemyManager.enemies[rand];
-                ApproveFiring(sender, payload);
-            }
 
         }
-        else if (payload.enemyToFireAt != null)
+
+
+
+
+        private void ApproveFiring(IMediatorReceiver<TurretPayload> requester, TurretPayload payload)
         {
-            ApproveFiring(sender, payload);
-            return;
+            _firingTurets.Add(new FiringTurret() { turret = requester, enemyFiringAt = payload.enemyToFireAt });
+            SendPayloadToReceiver(requester, payload);
         }
 
-    }
-
-
-
-
-    private void ApproveFiring(IMediatorReceiver<TurretPayload> requester, TurretPayload payload)
-    {
-        _firingTurets.Add(new FiringTurret() { turret = requester, enemyFiringAt = payload.enemyToFireAt });
-        SendPayloadToReceiver(requester, payload);
-    }
-
-    public bool IsEnemyOnFire(AEnemy enemy)
-    {
-        for (int i = 0; i < _firingTurets.Count; i++)
+        public bool IsEnemyOnFire(AEnemy enemy)
         {
-            if (_firingTurets[i].enemyFiringAt == enemy)
+            for (int i = 0; i < _firingTurets.Count; i++)
             {
-                return true;
+                if (_firingTurets[i].enemyFiringAt == enemy)
+                {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
+
+
+        public struct FiringTurret
+        {
+            public IMediatorReceiver<TurretPayload> turret;
+            public AEnemy enemyFiringAt;
+        }
     }
 
-
-    public struct FiringTurret
+    public struct TurretPayload : IMediatorPayload
     {
-        public IMediatorReceiver<TurretPayload> turret;
-        public AEnemy enemyFiringAt;
+
+        public AEnemy enemyToFireAt;
+
+
     }
-}
-
-public struct TurretPayload : IMediatorPayload
-{
-
-    public AEnemy enemyToFireAt;
-
-
 }
