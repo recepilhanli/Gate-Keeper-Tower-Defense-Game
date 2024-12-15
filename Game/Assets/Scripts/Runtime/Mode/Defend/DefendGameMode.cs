@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.PlayerOperations;
 using UnityEngine;
 
 namespace Game.Modes
@@ -19,7 +20,7 @@ namespace Game.Modes
         [SerializeField, Tooltip("min time between enemies (seconds)")] private float _minTimeBetweenEnemies = .25f;
         [SerializeField, Tooltip("max time between enemies (seconds)")] private float _maxTimeBetweenEnemies = 1f;
         [SerializeField] private int enemyCount = 10;
-        [SerializeField, Tooltip("Changes number of enemies for per wave. (Wave * enemySpawnMultiplier)")] private float _enemMultiplier = 1.1f;
+        [SerializeField, Tooltip("Changes number of enemies for per wave. (Wave * enemySpawnMultiplier)")] private float _enemyMultiplier = 1.1f;
 
         private int _enemyCount = 0;
         private bool _pause = true;
@@ -60,7 +61,7 @@ namespace Game.Modes
 
         public override void Success()
         {
-            GameManager.instance.score ++;
+            GameManager.instance.score++;
             _pause = true;
             wave++;
             Wave().Forget();
@@ -115,7 +116,11 @@ namespace Game.Modes
 
         public override void GuideEnemy(AEnemy enemy)
         {
-            if(_pause) return;
+            if (_pause)
+            {
+                enemy.target = Player.localPlayerInstance;
+                return;
+            }
             enemy.target = DefendingObject.instance;
         }
     }

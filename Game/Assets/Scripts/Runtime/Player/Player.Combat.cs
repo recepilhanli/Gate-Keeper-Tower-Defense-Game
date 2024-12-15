@@ -66,9 +66,11 @@ namespace Game.PlayerOperations
             Sequence.Create()
             .Group(Tween.ShakeLocalPosition(_healthTMP.transform, new Vector3(3f, 3f, 3f), .3f, 15, easeBetweenShakes: Ease.OutElastic))
             .Group(Tween.ShakeLocalPosition(healthFill.transform, new Vector3(1, 1, 1), .1f, 5, easeBetweenShakes: Ease.OutElastic))
-            .Chain(Tween.Color(healthFill, Color.red, .3f))
-            .Chain(Tween.Color(healthFill, Color.white, .3f));
+            .Chain(Tween.Color(healthFill, Color.red, .15f, ease: Ease.OutQuart))
+            .Chain(Tween.Color(healthFill, Color.white, .15f, ease: Ease.InQuart));
 
+
+            CameraImpulse(new Vector3(0, 0, -2), .15f);
 
 
             healthFill.fillAmount = health / 100;
