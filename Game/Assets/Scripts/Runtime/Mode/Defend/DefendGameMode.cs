@@ -74,7 +74,7 @@ namespace Game.Modes
 
         private async UniTaskVoid Wave()
         {
-            _currentWaveDuration = _waveDuration + (wave * 1.15f * _waveDuration);
+            _currentWaveDuration = _waveDuration + (wave * 0.2f * _waveDuration);
             _enemyCount = 0;
             await UniTask.WaitForSeconds(_pauseTime);
             GameManager.instance.ShowTitle($"Wave {wave + 1} !", Color.red);
