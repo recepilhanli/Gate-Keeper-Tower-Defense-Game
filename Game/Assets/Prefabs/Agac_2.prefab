@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8708104351166417582}
   - component: {fileID: 4627662005714910485}
   - component: {fileID: 6118650783456197617}
+  - component: {fileID: 611567274217090548}
   m_Layer: 0
   m_Name: Agac_2
   m_TagString: Untagged
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &611567274217090548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680043060401700252}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.6002502, y: 20.039555, z: 3.587963}
+  m_Center: {x: 0.074222565, y: 10.019777, z: -0.16018105}
