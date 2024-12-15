@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8045b9d3e2bc64692a8e49f1d84a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 500
   navMeshAgent: {fileID: 554136162891585195}
   rb: {fileID: 0}
   animator: {fileID: 0}

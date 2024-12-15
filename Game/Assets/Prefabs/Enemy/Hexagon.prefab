@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7b035f5ed71f747a07ad125f8076fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  health: 250
   navMeshAgent: {fileID: 6315855602468137659}
   rb: {fileID: 4625264690913688819}
   animator: {fileID: 0}
