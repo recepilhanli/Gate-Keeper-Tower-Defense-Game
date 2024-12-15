@@ -37,10 +37,14 @@ namespace Game.AI
                         }
                     }
                     EffectManager.instance.CreatePuffEffect(transform.position);
+
+                    GameManager.instance.currency += 5;
                 }
                 Sequence.Create().OnComplete(() => Destroy(gameObject))
                 .Chain(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
                 .Chain(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
+
+
             };
 
             onTakeDamage += (damageData) =>
@@ -59,6 +63,8 @@ namespace Game.AI
                     if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 2f;
                     else navMeshAgent.stoppingDistance = 4.25f;
                 }
+
+                GameManager.instance.currency += 1;
             };
         }
 

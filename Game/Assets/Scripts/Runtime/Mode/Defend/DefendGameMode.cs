@@ -27,18 +27,19 @@ namespace Game.Modes
         private List<EnemySpawn> _enemySpawnsForCurrentWave = new List<EnemySpawn>();
 
 
-
+        private float _currentWaveDuration = 0;
 
         #region Abstract Methods
         public override void GameModeUpdate()
         {
             if (_pause) return;
 
-            _waveDuration -= Time.deltaTime;
-            if (_waveDuration <= 0 && _enemyCount == 0)
+            _currentWaveDuration -= Time.deltaTime;
+            if (_currentWaveDuration <= 0 && _enemyCount == 0)
             {
                 Success();
             }
+            if (_currentWaveDuration > 0) GameManager.instance.timerTMP.text = _currentWaveDuration.ToString("F1");
         }
 
         public override void InitGameMode()
@@ -47,19 +48,22 @@ namespace Game.Modes
             _pause = true;
             wave = 0;
             Wave().Forget();
+            GameManager.instance.timerTMP.text = "Waiting...";
         }
 
         public override void Fail()
         {
             _pause = true;
             wave = 0;
-
+            GameManager.instance.timerTMP.text = "Failed!";
         }
 
         public override void Success()
         {
+            GameManager.instance.currency += 40 * wave;
             GameManager.instance.score++;
             _pause = true;
+            GameManager.instance.timerTMP.text = "Waiting..";
             wave++;
             Wave().Forget();
         }
@@ -67,7 +71,8 @@ namespace Game.Modes
 
         private async UniTaskVoid Wave()
         {
-            GameManager.instance.ShowTitle($"Wave {wave} !", Color.red);
+            GameManager.instance.ShowTitle($"Wave {wave + 1} !", Color.red);
+            _currentWaveDuration = _waveDuration + (wave * 1.15f * _waveDuration);
             _enemyCount = 0;
             await UniTask.WaitForSeconds(_pauseTime);
 

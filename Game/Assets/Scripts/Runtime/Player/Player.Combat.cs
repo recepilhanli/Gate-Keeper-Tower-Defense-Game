@@ -46,7 +46,7 @@ namespace Game.PlayerOperations
 
                 if (hitCollider.TryGetComponent(out AEnemy enemy))
                 {
-                    enemy.Damage(new DamageData(this, 20, transform.position, DamageType.Physical));
+                    enemy.Damage(new DamageData(this, 20, transform.position, DamageType.Standart));
                     if (hitCollider.attachedRigidbody != null && hitCollider.attachedRigidbody.mass < 5) enemy.AddForce((transform.forward) + Vector3.up * 5);
 
                     wasHit = true;

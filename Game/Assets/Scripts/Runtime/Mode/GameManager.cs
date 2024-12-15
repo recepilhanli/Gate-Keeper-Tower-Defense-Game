@@ -13,6 +13,7 @@ namespace Game.Modes
         private bool isGameStarted = false;
         [SerializeField] private int _currency = 0;
         public int score = 0;
+        public TextMeshProUGUI timerTMP;
         [SerializeField] private TextMeshProUGUI _currencyTMP;
         [SerializeField] private TextMeshProUGUI _TitleTMP;
 
@@ -44,6 +45,7 @@ namespace Game.Modes
             _currencyTMP.text = _currency.ToString();
             ShowTitle("Defend the Gate!", Color.yellow);
             Invoke(nameof(StartGame), 5f);
+            timerTMP.text = "Ready?";
         }
 
         [ContextMenu("Start Game")]

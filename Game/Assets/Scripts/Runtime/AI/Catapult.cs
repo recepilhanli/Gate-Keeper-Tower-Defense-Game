@@ -30,6 +30,8 @@ namespace Game.AI
                 Sequence.Create().OnComplete(() => Destroy(gameObject))
                 .Group(Tween.Scale(transform, transform.lossyScale.x * 1.5f, 0.5f, Ease.OutElastic))
                 .Group(Tween.Scale(transform, 0, 0.2f, Ease.InElastic));
+
+                GameManager.instance.currency += 15;
             };
 
             onTakeDamage += (damageData) =>
@@ -44,6 +46,8 @@ namespace Game.AI
                     if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 1.5f;
                     else navMeshAgent.stoppingDistance = 4.25f;
                 }
+
+                GameManager.instance.currency += 1;
             };
         }
 

@@ -38,10 +38,10 @@ MonoBehaviour:
       type: 3}
     minWave: 5
     spawnRatio: 0.5
-  _defaultEnemy: {fileID: 3476547081795937832, guid: 87922de21d6f48c4e87ffcdd1025d2e2,
+  _defaultEnemy: {fileID: 3476547081795937832, guid: 0bf4194c173701d45bbb423cb7143d61,
     type: 3}
   _pauseTime: 10
-  _waveDuration: 35.77671
+  _waveDuration: 60
   _minTimeBetweenEnemies: 0.25
   _maxTimeBetweenEnemies: 1
   enemyCount: 10
