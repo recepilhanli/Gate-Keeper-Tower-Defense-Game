@@ -18,6 +18,7 @@ namespace Game.PlayerOperations
         public float movementSpeed = 5f;
         [NonSerialized] public bool blockMovement = false;
         [NonSerialized] public Vector3 lastMouseHitPoint;
+        private Vector2 _lerpedMovementInput;
 
 
         private void InitMovement()
@@ -43,7 +44,8 @@ namespace Game.PlayerOperations
 
             rigidBody.velocity = movement;
 
-            animator.SetBool(AnimationTable.IsMoving, rigidBody.velocity.magnitude > 0.1);
+            _lerpedMovementInput = Vector2.Lerp(_lerpedMovementInput, movementInput, Time.deltaTime * 10);
+            animator.SetBool(AnimationTable.IsMoving, _lerpedMovementInput.magnitude > 0.1f);
 
             //Removed
             // animator.SetFloat(AnimationTable.x, movementInput.x * transform.forward.x);
