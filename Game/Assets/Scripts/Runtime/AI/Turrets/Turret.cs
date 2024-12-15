@@ -132,7 +132,7 @@ namespace Game.AI
             var bullet = Instantiate(bulletPrefab, muzzle.transform.position, toEnemy);
             bullet.sender = this;
 
-            if (fireClip != null) AudioSource.PlayClipAtPoint(fireClip, Player.localPlayerInstance.GetCamera().transform.position, .5f);
+            if (fireClip != null) AudioSource.PlayClipAtPoint(fireClip, Player.localPlayerInstance.GetCamera().transform.position, .3f);
         }
 
         public void OnReceiveMessage(TurretPayload payload)
