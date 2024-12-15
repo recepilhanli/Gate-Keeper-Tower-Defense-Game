@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 
-//EffectManager.ChromaticAbernation
+//EffectManager.Vignette
 public partial class EffectManager
 {
     private Vignette _vignette;

@@ -13,5 +13,6 @@ public partial class EffectManager : Singleton<EffectManager>
     {
         InitChromaticAbernation();
         InitVignette();
+        InitSaturation();
     }
 }

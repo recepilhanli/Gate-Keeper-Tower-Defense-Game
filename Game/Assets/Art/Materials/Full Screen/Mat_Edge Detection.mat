@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth_Bias: 2.47
-    - _Depth_Line_Bias: 7.63
+    - _Depth_Bias: 1.47
+    - _Depth_Line_Bias: 7.5
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _Position: {r: 0.006, g: 0.01, b: 0, a: 0}

@@ -39,7 +39,8 @@ namespace Game.Modes
             {
                 Success();
             }
-            if (_currentWaveDuration > 0) GameManager.instance.timerTMP.text = _currentWaveDuration.ToString("F1");
+            if (_currentWaveDuration > 1) GameManager.instance.timerTMP.text = _currentWaveDuration.ToString("F1");
+            else if ( _enemyCount != 0) GameManager.instance.timerTMP.text = $"<color=yellow>Eliminate The Enemies: {_enemyCount}</color>";
         }
 
         public override void InitGameMode()
@@ -55,7 +56,7 @@ namespace Game.Modes
         {
             _pause = true;
             wave = 0;
-            GameManager.instance.timerTMP.text = "Failed!";
+            GameManager.instance.timerTMP.text = "<color=red>Failed!</color>";
         }
 
         public override void Success()
@@ -71,10 +72,10 @@ namespace Game.Modes
 
         private async UniTaskVoid Wave()
         {
-            GameManager.instance.ShowTitle($"Wave {wave + 1} !", Color.red);
             _currentWaveDuration = _waveDuration + (wave * 1.15f * _waveDuration);
             _enemyCount = 0;
             await UniTask.WaitForSeconds(_pauseTime);
+            GameManager.instance.ShowTitle($"Wave {wave + 1} !", Color.red);
 
             _enemySpawnsForCurrentWave.Clear();
 

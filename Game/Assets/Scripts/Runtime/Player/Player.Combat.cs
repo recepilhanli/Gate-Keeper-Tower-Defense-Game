@@ -21,6 +21,7 @@ namespace Game.PlayerOperations
         [SerializeField] private TextMeshProUGUI _healthTMP;
 
         private bool hasAttackedWithRightHand = false;
+        public bool isDead { get; private set; } = false;
 
         private void InitCombat()
         {
@@ -61,6 +62,7 @@ namespace Game.PlayerOperations
 
         private void OnPlayerTakeDamage(DamageData data)
         {
+            if (isDead) return;
             Tween.ShakeScale(transform, new Vector3(.2f, .2f, .2f), .2f, 5, easeBetweenShakes: Ease.OutQuart);
 
             Sequence.Create()
@@ -73,10 +75,9 @@ namespace Game.PlayerOperations
             CameraImpulse(new Vector3(0, 0, -2), .15f);
 
             EffectManager.instance.SetVignetteIntensity(.4f, .5f);
-
-
             healthFill.fillAmount = health / 100;
             _healthTMP.text = $"%{health}";
+
         }
 
         public void RegenerateHealth()
@@ -89,8 +90,12 @@ namespace Game.PlayerOperations
 
         private void OnPlayerDeath(DeathReason reason = DeathReason.Standart)
         {
+            if (isDead) return;
+            isDead = true;
             gameObject.SetActive(false);
             GameManager.instance.Fail();
+
+            EffectManager.instance.DeathEffect();
         }
 
 
