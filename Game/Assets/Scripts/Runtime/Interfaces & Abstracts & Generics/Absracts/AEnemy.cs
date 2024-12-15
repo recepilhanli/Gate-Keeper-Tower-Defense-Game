@@ -61,7 +61,11 @@ public abstract class AEnemy : AEntity
                 GroundChecker().Forget();
                 onBecomePhysical?.Invoke();
             }
-            else onBecomeAgent?.Invoke();
+            else
+            {
+                EffectManager.instance.CreatePuffEffect(transform.position, .3f);
+                onBecomeAgent?.Invoke();
+            }
         }
     }
 

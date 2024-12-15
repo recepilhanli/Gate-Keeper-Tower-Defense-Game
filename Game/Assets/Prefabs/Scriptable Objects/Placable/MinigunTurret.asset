@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7561592953498524974, guid: b552402a8853ea04796ca023ecb4f9af, type: 3}
   price: 100
-  silhouetteMesh: {fileID: -3204891302372584070, guid: acad42204f128c74ba01215f48bbc59d,
+  silhouetteMesh: {fileID: -2822735324115940217, guid: acad42204f128c74ba01215f48bbc59d,
     type: 3}
   silhouetteLocalRotation: {x: -90, y: 0, z: 0}
   silhouetteLocalScale: {x: 1.25, y: 1.25, z: 1.25}

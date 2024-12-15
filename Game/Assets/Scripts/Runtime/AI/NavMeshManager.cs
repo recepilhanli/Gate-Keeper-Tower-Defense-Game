@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor.AI;
 using UnityEngine;
 
 public class NavMeshManager : Singleton<NavMeshManager>
@@ -11,6 +12,6 @@ public class NavMeshManager : Singleton<NavMeshManager>
     [ContextMenu("Build NavMesh")]
     public void Build()
     {
-        surface.BuildNavMesh();
+        NavMeshBuilder.BuildNavMeshAsync();
     }
 }

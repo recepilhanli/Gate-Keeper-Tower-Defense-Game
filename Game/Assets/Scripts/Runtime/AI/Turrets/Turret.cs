@@ -25,10 +25,15 @@ namespace Game.AI
         {
             onTakeDamage += (data) =>
             {
-                Tween.ShakeScale(transform, new Vector3(.3f,.3f,.3f), .1f);
+                Tween.ShakeScale(transform, new Vector3(.3f, .3f, .3f), .1f);
 
             };
 
+            onDeath += (data) =>
+            {
+                EffectManager.instance.CreatePuffEffect(transform.position, 5);
+                Tween.Scale(transform, Vector3.zero, .5f, Ease.InElastic).OnComplete(() => Destroy(transform.parent.gameObject));
+            };
 
             LifeCycle().Forget();
         }
