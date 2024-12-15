@@ -28,6 +28,8 @@ namespace Game.PlayerOperations.Skills
             _skills.Add(skill.skillType, skill);
         }
 
+        public static void  ReleaseAllSkils() => _skills.Clear();
+
     }
 }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.PlayerOperations.Skills;
 using UnityEngine;
 
 namespace Game.PlayerOperations
@@ -9,6 +10,9 @@ namespace Game.PlayerOperations
     {
         public static Player localPlayerInstance;
         public GameObject playerMesh;
+
+        public AudioSource audioSource;
+        public AudioClip punch;
 
         private void Awake()
         {
@@ -23,6 +27,11 @@ namespace Game.PlayerOperations
         private void Update()
         {
             UpdateMovement();
+        }
+
+        private void OnDestroy()
+        {
+            SkillDatabase.ReleaseAllSkils();
         }
 
 

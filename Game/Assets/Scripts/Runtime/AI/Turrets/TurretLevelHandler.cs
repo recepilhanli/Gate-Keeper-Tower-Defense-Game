@@ -11,7 +11,7 @@ namespace Game.AI
         public int upgradeCost = 100;
         public List<Turret> turretLevels = new List<Turret>();
 
-        void Awake() => NavMeshManager.instance.Build();
+        void Start() => NavMeshManager.instance.Build();
 
         [ContextMenu("Upgrade Turret")]
         public void UpgradeTurret()

@@ -40,7 +40,7 @@ namespace Game.Modes
                 Success();
             }
             if (_currentWaveDuration > 1) GameManager.instance.timerTMP.text = _currentWaveDuration.ToString("F1");
-            else if ( _enemyCount != 0) GameManager.instance.timerTMP.text = $"<color=yellow>Eliminate The Enemies: {_enemyCount}</color>";
+            else if (_enemyCount != 0) GameManager.instance.timerTMP.text = $"<color=yellow>Eliminate The Enemies: {_enemyCount}</color>";
         }
 
         public override void InitGameMode()
@@ -57,10 +57,12 @@ namespace Game.Modes
             _pause = true;
             wave = 0;
             GameManager.instance.timerTMP.text = "<color=red>Failed!</color>";
+            EffectManager.instance.DeathEffect();
         }
 
         public override void Success()
         {
+            GameManager.instance.ShowTitle("Wave Completed!", Color.green);
             GameManager.instance.currency += 40 * wave;
             GameManager.instance.score++;
             _pause = true;

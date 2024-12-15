@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
 
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+    
     public void StartNextGame()
     {
         

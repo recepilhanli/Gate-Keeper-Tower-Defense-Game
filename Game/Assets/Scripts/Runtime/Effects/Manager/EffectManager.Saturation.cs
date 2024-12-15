@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Modes;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -42,6 +44,8 @@ public partial class EffectManager
     {
         Time.timeScale = 0.3f;
         SetSaturation(-100, 1);
+        GameManager.instance.deathPanel.SetActive(true);
+        Tween.ShakeScale(GameManager.instance.deathPanel.transform, new Vector3(.5f, .5f, .5f), 1.25f, 10);
     }
 
 }

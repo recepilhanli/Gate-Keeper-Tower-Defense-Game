@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace Game.Modes
 {
+    using Game.PlayerOperations;
+    using UnityEngine.InputSystem;
+    using UnityEngine.SceneManagement;
+    using Debug = Utils.Logger.Debug;
     public class GameManager : Singleton<GameManager>
     {
         public AGameMode gameMode = null;
@@ -14,20 +18,30 @@ namespace Game.Modes
         [SerializeField] private int _currency = 0;
         public int score = 0;
         public TextMeshProUGUI timerTMP;
+        public GameObject deathPanel;
+        public GameObject pausePanel;
         [SerializeField] private TextMeshProUGUI _currencyTMP;
         [SerializeField] private TextMeshProUGUI _TitleTMP;
+        [SerializeField] private TextMeshProUGUI _tutorialTMP;
 
         public int currency
         {
             get => _currency;
             set
             {
+                if(gameMode == null)
+                {
+                    Debug.LogError("GameMode is not set!!");
+                    return;
+                }
+
                 _currency = value;
                 _currencyTMP.text = _currency.ToString();
             }
         }
 
 
+        #region  Temporary UI Operations
         public void ShowTitle(string title, Color color)
         {
             _TitleTMP.text = title;
@@ -40,8 +54,46 @@ namespace Game.Modes
             .Group(Tween.ShakeScale(_TitleTMP.transform, new Vector3(.1f, .1f, .1f), 1.25f, 10, easeBetweenShakes: Ease.OutQuart));
         }
 
+
+
+        public void ReturnMainMenu() => SceneManager.LoadScene(0);
+
+        public void RestartGame()
+        {
+            Destroy(Player.localPlayerInstance.gameObject);
+            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            Time.timeScale = 1;
+        }
+
+
+        public void Pause()
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+        }
+
+        public void Resume()
+        {
+            Time.timeScale = 1;
+            pausePanel.SetActive(false);
+        }
+        #endregion
+
+        #region GameMode
         private void Start()
         {
+            var colorAlpha = _tutorialTMP.color;
+            colorAlpha.a = 0;
+            Tween.Color(_tutorialTMP, colorAlpha, 2f,Ease.Linear, startDelay: 5f);
+
+            if(gameMode == null)
+            {
+                Debug.LogError("GameMode is not set!!");
+                return;
+            }
+
             _currencyTMP.text = _currency.ToString();
             ShowTitle("Defend the Gate!", Color.yellow);
             Invoke(nameof(StartGame), 5f);
@@ -62,11 +114,17 @@ namespace Game.Modes
             isGameStarted = true;
         }
 
+
+
         private void Update()
         {
             if (!isGameStarted) return;
             gameMode.GameModeUpdate();
+            if (Keyboard.current.escapeKey.wasPressedThisFrame) Pause();
         }
+
+
+
 
         public Vector3 GetRandomSpawnPoint()
         {
@@ -81,5 +139,7 @@ namespace Game.Modes
         public void Success() => gameMode.Success();
 
         public void GuideEnemy(AEnemy enemy) => gameMode.GuideEnemy(enemy);
+        #endregion
+
     }
 }

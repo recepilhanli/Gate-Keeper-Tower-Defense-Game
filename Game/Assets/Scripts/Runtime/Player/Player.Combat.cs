@@ -95,7 +95,6 @@ namespace Game.PlayerOperations
             gameObject.SetActive(false);
             GameManager.instance.Fail();
 
-            EffectManager.instance.DeathEffect();
         }
 
 
