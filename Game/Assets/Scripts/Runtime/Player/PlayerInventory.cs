@@ -20,6 +20,7 @@ namespace Game.Level
 
         [Header("Inventory")]
         [SerializeField] private PlacableContainer[] _placables = new PlacableContainer[3];
+        [SerializeField] private GameObject _instructionPanel;
 
         [Header("Silhouette")]
         public Material silhouetteMaterial;
@@ -48,7 +49,6 @@ namespace Game.Level
             silhouetteGameObject.SetActive(false);
 
             Player.localPlayerInstance.onBowlingAttackStart += Disable;
-            onPlayerBuyAnyBuild += HandleColorsForAllImages;
             onPlayerBuyAnyBuild += Disable;
         }
 
@@ -69,7 +69,7 @@ namespace Game.Level
             silhouetteGameObject.transform.localEulerAngles = activePlacable.silhouetteLocalRotation;
             silhouetteGameObject.SetActive(true);
             _isPlacing = true;
-
+            _instructionPanel.SetActive(true);
             HandleColorsForAllImages();
 
         }
@@ -122,6 +122,8 @@ namespace Game.Level
             _isPlacing = false;
             silhouetteGameObject.SetActive(false);
             _activeSilhouetteIndex = -1;
+            HandleColorsForAllImages();
+            _instructionPanel.SetActive(false);
         }
 
         private void SetAllowed(bool isAllowed)
@@ -164,7 +166,7 @@ namespace Game.Level
                     if (colliders.Length == 1)
                     {
                         Debug.Log("Colliders[0]: " + colliders[0].name);
-                        if (!colliders[0].CompareTag("Ground") || colliders[0].gameObject.layer ==  LayerMasks.LAYER_CANT_PLACE)
+                        if (!colliders[0].CompareTag("Ground") || colliders[0].gameObject.layer == LayerMasks.LAYER_CANT_PLACE)
                         {
                             SetAllowed(false);
                         }

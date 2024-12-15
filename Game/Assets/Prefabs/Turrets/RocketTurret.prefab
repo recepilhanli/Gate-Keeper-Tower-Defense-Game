@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 6587055895973807422}
   - component: {fileID: 316706187987651596}
   - component: {fileID: 950955743298968856}
+  - component: {fileID: 6950208277763404220}
   m_Layer: 6
   m_Name: RocketTurret
   m_TagString: Untagged
@@ -578,6 +579,22 @@ MonoBehaviour:
   - {fileID: 5566345310825972797}
   - {fileID: 8759158894260554519}
   - {fileID: 3427913627121895621}
+--- !u!208 &6950208277763404220
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016084746415913033}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1, y: 1.1, z: 1.4990001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 1.4990001}
+  m_TimeToStationary: 0.5
 --- !u!1 &6481092031583796873
 GameObject:
   m_ObjectHideFlags: 0

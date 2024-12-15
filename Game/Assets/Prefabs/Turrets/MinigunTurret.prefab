@@ -80231,6 +80231,7 @@ GameObject:
   - component: {fileID: 4965930499483101552}
   - component: {fileID: 5647375063388517252}
   - component: {fileID: 7379829123241321128}
+  - component: {fileID: 5975171085925440577}
   m_Layer: 6
   m_Name: MinigunTurret
   m_TagString: Untagged
@@ -80345,6 +80346,22 @@ MonoBehaviour:
   - {fileID: 5694702908016311148}
   - {fileID: 343344809157273988}
   - {fileID: 979820706431372751}
+--- !u!208 &5975171085925440577
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561592953498524974}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1, y: 1.1, z: 1.4990001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 1.4990001}
+  m_TimeToStationary: 0.5
 --- !u!1 &8203527964734193707
 GameObject:
   m_ObjectHideFlags: 0

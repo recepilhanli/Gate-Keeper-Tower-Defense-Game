@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Animations;
+using Game.Modes;
 using PrimeTween;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace Game.PlayerOperations
@@ -13,6 +16,9 @@ namespace Game.PlayerOperations
     //Player.Combat 
     public partial class Player
     {
+        [Header("Combat")]
+        [SerializeField] private Image healthFill;
+        [SerializeField] private TextMeshProUGUI _healthTMP;
 
         private bool hasAttackedWithRightHand = false;
 
@@ -56,11 +62,31 @@ namespace Game.PlayerOperations
         private void OnPlayerTakeDamage(DamageData data)
         {
             Tween.ShakeScale(transform, new Vector3(.2f, .2f, .2f), .2f, 5, easeBetweenShakes: Ease.OutQuart);
+
+            Sequence.Create()
+            .Group(Tween.ShakeLocalPosition(_healthTMP.transform, new Vector3(3f, 3f, 3f), .3f, 15, easeBetweenShakes: Ease.OutElastic))
+            .Group(Tween.ShakeLocalPosition(healthFill.transform, new Vector3(1, 1, 1), .1f, 5, easeBetweenShakes: Ease.OutElastic))
+            .Chain(Tween.Color(healthFill, Color.red, .3f))
+            .Chain(Tween.Color(healthFill, Color.white, .3f));
+
+
+
+            healthFill.fillAmount = health / 100;
+            _healthTMP.text = $"%{health}";
+        }
+
+        public void RegenerateHealth()
+        {
+            health = 100;
+            health = Mathf.Clamp(health, 0, 100);
+            healthFill.fillAmount = health / 100;
+            _healthTMP.text = $"%{health}";
         }
 
         private void OnPlayerDeath(DeathReason reason = DeathReason.Standart)
         {
-
+            gameObject.SetActive(false);
+            GameManager.instance.Fail();
         }
 
 
