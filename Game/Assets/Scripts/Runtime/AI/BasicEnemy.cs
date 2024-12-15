@@ -66,6 +66,21 @@ namespace Game.AI
 
                 GameManager.instance.currency += 1;
             };
+
+
+            if (_renderer != null)
+            {
+                if (_level > 1)
+                {
+                    Color color = Color.white;
+                    if (_level == 1) color = Color.yellow;
+                    else if (_level == 2) color = Color.red;
+                    else if (_level >= 3) color = Color.magenta;
+                    MaterialPropertyBlock block = new MaterialPropertyBlock();
+                    block.SetColor(ShaderPorperties.baseColor, color);
+                    _renderer.SetPropertyBlock(block);
+                }
+            }
         }
 
 

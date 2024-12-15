@@ -54,6 +54,7 @@ MonoBehaviour:
     type: 3}
   fireRate: 0.9
   fireDistance: 30
+  fireClip: {fileID: 8300000, guid: 975b695662e64404db0eca0843d7dc5d, type: 3}
 --- !u!1 &6016084746415913033
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +253,7 @@ MonoBehaviour:
     type: 3}
   fireRate: 0.45
   fireDistance: 40
+  fireClip: {fileID: 8300000, guid: 975b695662e64404db0eca0843d7dc5d, type: 3}
 --- !u!1 &7056885450343594928
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +308,7 @@ MonoBehaviour:
     type: 3}
   fireRate: 1.25
   fireDistance: 20
+  fireClip: {fileID: 8300000, guid: 975b695662e64404db0eca0843d7dc5d, type: 3}
 --- !u!1001 &569267904618158335
 PrefabInstance:
   m_ObjectHideFlags: 0

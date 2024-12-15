@@ -20,6 +20,7 @@ namespace Game.AI
         public float fireDistance = 20f;
         private AEnemy _enemyFiringAt = null;
         private int _lastMuzzleFired = 0;
+        public AudioClip fireClip;
 
         private void Awake()
         {
@@ -81,6 +82,7 @@ namespace Game.AI
                 await UniTask.WaitForSeconds(fireRate);
             }
 
+
         }
 
         private async UniTaskVoid LookAtEnemy()
@@ -129,6 +131,8 @@ namespace Game.AI
             Quaternion toEnemy = Quaternion.LookRotation(_enemyFiringAt.transform.position - muzzle.transform.position);
             var bullet = Instantiate(bulletPrefab, muzzle.transform.position, toEnemy);
             bullet.sender = this;
+
+            if (fireClip != null) AudioSource.PlayClipAtPoint(fireClip, Player.localPlayerInstance.GetCamera().transform.position, .5f);
         }
 
         public void OnReceiveMessage(TurretPayload payload)

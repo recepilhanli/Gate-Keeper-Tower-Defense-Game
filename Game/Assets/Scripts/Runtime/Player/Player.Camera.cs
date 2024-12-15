@@ -34,7 +34,10 @@ namespace Game.PlayerOperations
             _noise.m_FrequencyGain = frequencyGain;
         }
 
-
+        public CinemachineVirtualCamera GetCamera()
+        {
+            return _playerCamera;
+        }
 
     }
 
