@@ -161,13 +161,8 @@ MonoBehaviour:
   _attackDamage: 5
   _attacRate: 1
   _level: 1
-  _enemiesToSpawnAfterDeath:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _animator: {fileID: 0}
+  _renderer: {fileID: 4452194017758355350}
+  _enemiesToSpawnAfterDeath: []
 --- !u!54 &4625264690913688819
 Rigidbody:
   m_ObjectHideFlags: 0
