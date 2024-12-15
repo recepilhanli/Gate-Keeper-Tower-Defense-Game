@@ -114,7 +114,7 @@ namespace Game.AI
             var rot = Quaternion.LookRotation(target.transform.position - _firePoint.position);
             Projectile projectile = Instantiate(_projectile, _firePoint.position, rot);
             projectile.sender = this;
-            if (Vector3.Distance(transform.position, target.transform.position) > 10) projectile.damage = _attackDamage;
+            if (Vector3.Distance(transform.position, target.transform.position) > 15) projectile.damage = _attackDamage;
             else target.Damage(new DamageData(this, _attackDamage));
         }
     }

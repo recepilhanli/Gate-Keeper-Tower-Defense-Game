@@ -104,7 +104,7 @@ MonoBehaviour:
   target: {fileID: 0}
   _attackDamage: 25
   _attacRate: 3
-  _attackRange: 30
+  _attackRange: 45
   _head: {fileID: 5769554765756522444}
   _firePoint: {fileID: 1227501214266649855}
   _projectile: {fileID: 351668729461319870, guid: 9fab38e9d482e394abd052760e465cf3,
