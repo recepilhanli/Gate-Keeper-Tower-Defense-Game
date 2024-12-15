@@ -85,7 +85,7 @@ namespace Game.Modes
 
             _pause = false;
 
-            int enemyCount = (int)(this.enemyCount * Mathf.Pow(_enemMultiplier, wave));
+            int enemyCount = (int)(this.enemyCount * Mathf.Pow(_enemyMultiplier, wave));
             for (int i = 0; i < this.enemyCount; i++)
             {
                 await SpawnRandomEnemy();
