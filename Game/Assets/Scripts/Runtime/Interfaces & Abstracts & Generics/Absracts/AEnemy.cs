@@ -14,7 +14,9 @@ public abstract class AEnemy : AEntity
 
     public NavMeshAgent navMeshAgent;
     public Rigidbody rb;
-    public AEntity target = null;
+    public Animator animator;
+
+    [Tooltip("Current Target")] public AEntity target = null;
 
     public bool isDead { get; protected set; } = false;
     public virtual bool isAvailable => !isDead && !isPhysical;
@@ -48,6 +50,8 @@ public abstract class AEnemy : AEntity
             bool hasChanged = _isPhysical != value;
             if (!hasChanged) return;
 
+
+            if (animator != null) animator.enabled = !value;
             _isPhysical = value;
             rb.isKinematic = !value;
             navMeshAgent.enabled = !value;

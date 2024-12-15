@@ -16,6 +16,7 @@ namespace Game.AI
         [SerializeField, Tooltip("in seconds")] float _attacRate = 1f;
         [SerializeField, Range(1, 5)] private int _level = 1;
         [SerializeField] private List<AEnemy> _enemiesToSpawnAfterDeath = new List<AEnemy>();
+        [SerializeField] private Animator _animator;
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
 
