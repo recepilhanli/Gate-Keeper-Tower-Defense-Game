@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e412e9faf4eb6164c82f9d9f57ae097d, type: 3}
+  m_Name: Defend Game Mode
+  m_EditorClassIdentifier: 
+  _enemySpawns:
+  - name: Triangle
+    enemyPrefab: {fileID: 3476547081795937832, guid: 0bf4194c173701d45bbb423cb7143d61,
+      type: 3}
+    minWave: 1
+    spawnRatio: 1
+  - name: Square
+    enemyPrefab: {fileID: 3476547081795937832, guid: a2724a590150eab40a587bfd82c15569,
+      type: 3}
+    minWave: 2
+    spawnRatio: 0.5
+  - name: Pentagon
+    enemyPrefab: {fileID: 3476547081795937832, guid: 3da6ce02a2f28b444979e968d75e94a6,
+      type: 3}
+    minWave: 3
+    spawnRatio: 0.25
+  - name: Hexagon
+    enemyPrefab: {fileID: 3476547081795937832, guid: 4a892c0768bd61d40b21beaf701bb734,
+      type: 3}
+    minWave: 4
+    spawnRatio: 0.25
+  - name: Catapult
+    enemyPrefab: {fileID: 1988964693609058175, guid: eb7c882afaa9356408c2db86497267be,
+      type: 3}
+    minWave: 5
+    spawnRatio: 0.5
+  _defaultEnemy: {fileID: 3476547081795937832, guid: 87922de21d6f48c4e87ffcdd1025d2e2,
+    type: 3}
+  _pauseTime: 10
+  _waveDuration: 35.77671
+  _minTimeBetweenEnemies: 0.25
+  _maxTimeBetweenEnemies: 1
+  enemyCount: 10
+  _enemyMultiplier: 1.1
