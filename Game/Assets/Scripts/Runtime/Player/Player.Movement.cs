@@ -43,7 +43,7 @@ namespace Game.PlayerOperations
 
             rigidBody.velocity = movement;
 
-            animator.SetBool(AnimationTable.IsMoving, rigidBody.velocity.magnitude > 0.05f);
+            animator.SetBool(AnimationTable.IsMoving, rigidBody.velocity.magnitude > 0.1);
 
             //Removed
             // animator.SetFloat(AnimationTable.x, movementInput.x * transform.forward.x);

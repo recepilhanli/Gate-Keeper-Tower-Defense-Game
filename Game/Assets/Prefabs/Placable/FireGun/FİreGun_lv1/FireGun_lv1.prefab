@@ -30,7 +30,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6528674411449265961}
-  - {fileID: 4809132550921718804}
   m_Father: {fileID: 141715564314921651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8093331718511735551
@@ -42,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 141715564314921651}
-  - component: {fileID: 5523001273504946964}
   m_Layer: 6
   m_Name: FireGun_lv1
   m_TagString: Turret
@@ -67,27 +65,6 @@ Transform:
   - {fileID: 5368258416905950199}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5523001273504946964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8093331718511735551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ca9c4c5812676040b17f90df5ca2014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  head: {fileID: 5368258416905950199}
-  muzzles:
-  - {fileID: 8619426398138580885}
-  - {fileID: 6541132702437662241}
-  bulletPrefab: {fileID: 1800806269380707742, guid: 09a7339aa64f3c349a89a0042fb93593,
-    type: 3}
-  fireRate: 0.5
-  fireDistance: 20
 --- !u!1 &8420406275674554954
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +178,8 @@ Transform:
   m_LocalPosition: {x: 0.13622856, y: 0.17199999, z: -0.020988464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4809132550921718804}
   m_Father: {fileID: 5368258416905950199}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 270}
 --- !u!33 &4015125209454105006
@@ -280,14 +258,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8857089938800254496}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: 0.2300005, y: 0.24911386, z: -0.027267456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.006278485, y: 0.09377147, z: 0.077114776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8619426398138580906}
   - {fileID: 6541132702437662238}
-  m_Father: {fileID: 5368258416905950199}
+  m_Father: {fileID: 6528674411449265961}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 270}
 --- !u!33 &1194034347994911429
 MeshFilter:
@@ -453,12 +431,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 576857756963597038}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6541132702437662241 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5964926015556990159, guid: f932d781c2b8b434a9469f281d743032,
-    type: 3}
-  m_PrefabInstance: {fileID: 576857756963597038}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2691453005868174170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -567,12 +539,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f932d781c2b8b434a9469f281d743032, type: 3}
---- !u!198 &8619426398138580885 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5964926015556990159, guid: f932d781c2b8b434a9469f281d743032,
-    type: 3}
-  m_PrefabInstance: {fileID: 2691453005868174170}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8619426398138580906 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5964926015556990192, guid: f932d781c2b8b434a9469f281d743032,

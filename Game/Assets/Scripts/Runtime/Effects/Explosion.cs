@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Utils;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -18,7 +19,7 @@ public class Explosion : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Player") && !canDamagePlayer) continue;
+            if (collider.gameObject.layer == LayerMasks.LAYER_PLAYER && !canDamagePlayer) continue;
             if (collider.TryGetComponent(out IDamageable damageable))
             {
                 if (!fadeDamage) damageable.Damage(new DamageData(damage, transform.position));
