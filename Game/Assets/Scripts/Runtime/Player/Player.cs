@@ -12,7 +12,8 @@ namespace Game.PlayerOperations
         public GameObject playerMesh;
 
         public AudioSource audioSource;
-        public AudioClip punch;
+        public AudioClip punchClip;
+
 
         private void Awake()
         {

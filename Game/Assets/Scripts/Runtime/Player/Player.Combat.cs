@@ -56,6 +56,8 @@ namespace Game.PlayerOperations
             }
             if (wasHit)
             {
+                audioSource.clip = punchClip;
+                audioSource.Play();
                 CameraImpulse(new Vector3(0, 0, 2), .2f);
             }
         }
@@ -77,6 +79,8 @@ namespace Game.PlayerOperations
             EffectManager.instance.SetVignetteIntensity(.4f, .5f);
             healthFill.fillAmount = health / 100;
             _healthTMP.text = $"%{health}";
+
+
 
         }
 
