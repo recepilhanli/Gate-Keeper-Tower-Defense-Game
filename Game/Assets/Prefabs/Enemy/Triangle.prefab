@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3705602434755834858}
   - component: {fileID: 2767453170162033374}
   - component: {fileID: 3476547081795937832}
-  - component: {fileID: 2747176232904779701}
   - component: {fileID: 4625264690913688819}
   - component: {fileID: 6315855602468137659}
+  - component: {fileID: 3773209208707294698}
   m_Layer: 7
-  m_Name: TestEnemyCube2
+  m_Name: Triangle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.028654415, y: -0.99865323, z: -0.030070513, w: 0.031087272}
   m_LocalPosition: {x: 0.90434456, y: 0.18, z: 5.7784348}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,35 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7b035f5ed71f747a07ad125f8076fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 500
   navMeshAgent: {fileID: 6315855602468137659}
   rb: {fileID: 4625264690913688819}
   target: {fileID: 0}
   _attackDamage: 5
   _attacRate: 1
   _level: 1
-  _enemiesToSpawnAfterDeath: []
---- !u!65 &2747176232904779701
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462012493892763831}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  _enemiesToSpawnAfterDeath:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &4625264690913688819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -177,3 +161,25 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!64 &3773209208707294698
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462012493892763831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2443237146360861554, guid: 3c01b7616e7e1104aa8fcc78040ca4c5, type: 3}
