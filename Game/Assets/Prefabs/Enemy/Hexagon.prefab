@@ -105,7 +105,7 @@ MonoBehaviour:
   target: {fileID: 0}
   _attackDamage: 5
   _attacRate: 1
-  _level: 1
+  _level: 4
   _enemiesToSpawnAfterDeath:
   - {fileID: 0}
   - {fileID: 0}
