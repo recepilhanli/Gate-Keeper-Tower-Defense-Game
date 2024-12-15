@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7b035f5ed71f747a07ad125f8076fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 150
   navMeshAgent: {fileID: 6315855602468137659}
   rb: {fileID: 4625264690913688819}
   animator: {fileID: 0}
   target: {fileID: 0}
-  _attackDamage: 5
+  _attackDamage: 4
   _attacRate: 1
   _level: 4
   _renderer: {fileID: 2707109659552861463}
