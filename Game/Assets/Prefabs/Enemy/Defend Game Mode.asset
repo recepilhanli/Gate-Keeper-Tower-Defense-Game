@@ -22,22 +22,22 @@ MonoBehaviour:
     enemyPrefab: {fileID: 3476547081795937832, guid: a2724a590150eab40a587bfd82c15569,
       type: 3}
     minWave: 2
-    spawnRatio: 0.5
+    spawnRatio: 0.8
   - name: Pentagon
     enemyPrefab: {fileID: 3476547081795937832, guid: 3da6ce02a2f28b444979e968d75e94a6,
       type: 3}
     minWave: 3
-    spawnRatio: 0.25
+    spawnRatio: 0.8
   - name: Hexagon
     enemyPrefab: {fileID: 3476547081795937832, guid: 4a892c0768bd61d40b21beaf701bb734,
       type: 3}
     minWave: 4
-    spawnRatio: 0.25
+    spawnRatio: 0.8
   - name: Catapult
     enemyPrefab: {fileID: 1988964693609058175, guid: eb7c882afaa9356408c2db86497267be,
       type: 3}
     minWave: 5
-    spawnRatio: 0.5
+    spawnRatio: 0.8
   _defaultEnemy: {fileID: 3476547081795937832, guid: 0bf4194c173701d45bbb423cb7143d61,
     type: 3}
   _pauseTime: 10
