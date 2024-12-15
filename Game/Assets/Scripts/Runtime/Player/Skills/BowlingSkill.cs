@@ -18,11 +18,20 @@ namespace Game.PlayerOperations.Skills
              {
                  if (_isBowling)
                  {
+
                      if (collision.gameObject.CompareTag("Enemy"))
                      {
                          if (collision.gameObject.TryGetComponent(out AEnemy enemy))
                          {
-                             enemy.Damage(new DamageData(player, 10, player.transform.position, DamageType.Physical));
+                             if (enemy.rb == null)
+                             {
+                                player.rigidBody.AddExplosionForce(10, collision.contacts[0].point, 5, 1, ForceMode.Impulse);
+                                 player.CameraImpulse(new Vector3(1, 1, 4), .3f);
+                                 EffectManager.instance.SetChromaticAbernationIntensity(1f, 1f);
+                                 GameManager.instance.currency += 5;
+                                 return;
+                             }
+                             enemy.Damage(new DamageData(player, 10, collision.contacts[0].point, DamageType.Physical));
                              enemy.AddForce((player.transform.forward + Vector3.up) * 3);
                              player.CameraImpulse(new Vector3(0, 0, 2), .2f);
                              EffectManager.instance.SetChromaticAbernationIntensity(.5f, .25f);

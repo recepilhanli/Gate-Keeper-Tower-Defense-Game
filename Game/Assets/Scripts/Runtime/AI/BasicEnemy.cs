@@ -15,8 +15,8 @@ namespace Game.AI
         [SerializeField] float _attackDamage = 5f;
         [SerializeField, Tooltip("in seconds")] float _attacRate = 1f;
         [SerializeField, Range(1, 5)] private int _level = 1;
+        [SerializeField] private Renderer _renderer;
         [SerializeField] private List<AEnemy> _enemiesToSpawnAfterDeath = new List<AEnemy>();
-        [SerializeField] private Animator _animator;
 
         public override bool isAvailable => !isDead && !isPhysical && target != null;
 
@@ -67,6 +67,11 @@ namespace Game.AI
         {
             while (!isDead)
             {
+                if (target == null)
+                {
+                    GameManager.instance.GuideEnemy(this);
+                    await UniTask.Delay(500);
+                }
                 await UnusualStateBlock();
                 await UniTask.WhenAll(GetNearToTarget(), Attack());
             }
@@ -74,7 +79,7 @@ namespace Game.AI
 
         protected override bool CheckUnusualState()
         {
-            return !isPhysical && target != null;
+            return !isPhysical;
         }
 
         private async UniTask GetNearToTarget()
@@ -89,7 +94,7 @@ namespace Game.AI
 
         private async UniTask Attack()
         {
-            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) <= navMeshAgent.stoppingDistance + .3f)
+            while (isAvailable && Vector3.Distance(transform.position, target.transform.position) <= navMeshAgent.stoppingDistance + .5f)
             {
                 if (navMeshAgent.hasPath) navMeshAgent.ResetPath();
                 target.Damage(new DamageData(_attackDamage));

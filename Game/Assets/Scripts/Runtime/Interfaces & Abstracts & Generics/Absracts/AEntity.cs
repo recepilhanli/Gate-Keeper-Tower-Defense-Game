@@ -11,7 +11,7 @@ public abstract class AEntity : MonoBehaviour, IDamageable
     public UnityAction<DamageData> onTakeDamage;
     public UnityAction<DeathReason> onDeath;
 
-
+    [Header("Common")]
     public float health = 100;
     public virtual void Damage(DamageData data)
     {

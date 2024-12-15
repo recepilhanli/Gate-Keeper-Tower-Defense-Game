@@ -17,7 +17,6 @@ public abstract class AEnemy : AEntity
     public Animator animator;
 
     [Tooltip("Current Target")] public AEntity target = null;
-
     public bool isDead { get; protected set; } = false;
     public virtual bool isAvailable => !isDead && !isPhysical;
     protected bool _isPhysical = false;
@@ -46,6 +45,7 @@ public abstract class AEnemy : AEntity
         get => _isPhysical;
         protected set
         {
+            if (rb == null || navMeshAgent == null) return;
             _physicalTime = Time.timeSinceLevelLoad;
             bool hasChanged = _isPhysical != value;
             if (!hasChanged) return;
@@ -69,7 +69,8 @@ public abstract class AEnemy : AEntity
 
     private void Awake()
     {
-        rb.freezeRotation = true;
+
+        if (rb != null) rb.freezeRotation = true;
         LifeCycle().Forget();
         EnemyManager.enemies.Add(this);
     }
@@ -99,12 +100,14 @@ public abstract class AEnemy : AEntity
 
     public void AddForce(Vector3 force)
     {
+        if (rb == null || navMeshAgent == null) return;
         isPhysical = true;
         rb.AddForce(force, ForceMode.Impulse);
     }
 
     public void MovePosition(Vector3 position)
     {
+        if (rb == null || navMeshAgent == null) return;
         isPhysical = true;
         Tween.RigidbodyMovePosition(rb, position, .2f, ease: Ease.OutQuart);
     }
