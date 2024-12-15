@@ -12,5 +12,6 @@ public partial class EffectManager : Singleton<EffectManager>
     private void Start()
     {
         InitChromaticAbernation();
+        InitVignette();
     }
 }

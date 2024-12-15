@@ -72,6 +72,8 @@ namespace Game.PlayerOperations
 
             CameraImpulse(new Vector3(0, 0, -2), .15f);
 
+            EffectManager.instance.SetVignetteIntensity(.4f, .5f);
+
 
             healthFill.fillAmount = health / 100;
             _healthTMP.text = $"%{health}";

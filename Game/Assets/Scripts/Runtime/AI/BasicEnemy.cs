@@ -56,7 +56,7 @@ namespace Game.AI
                     if (damageData.attacker.CompareTag("Enemy")) return;
                     target = damageData.attacker;
 
-                    if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 1.5f;
+                    if (target.CompareTag("Player")) navMeshAgent.stoppingDistance = 2f;
                     else navMeshAgent.stoppingDistance = 4.25f;
                 }
             };

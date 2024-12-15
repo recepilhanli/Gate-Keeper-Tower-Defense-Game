@@ -50,6 +50,8 @@ namespace Game.Level
 
             Player.localPlayerInstance.onBowlingAttackStart += Disable;
             onPlayerBuyAnyBuild += Disable;
+
+            HandleColorsForAllImages();
         }
 
         public void SetActiveSillhouette(int index)
@@ -146,12 +148,10 @@ namespace Game.Level
             {
                 SetActiveSillhouette(1);
             }
-            if (Keyboard.current.digit3Key.wasPressedThisFrame)
-            {
-                SetActiveSillhouette(2);
-            }
-
-
+            // if (Keyboard.current.digit3Key.wasPressedThisFrame)
+            // {
+            //     SetActiveSillhouette(2);
+            // }
 
             if (_isPlacing)
             {

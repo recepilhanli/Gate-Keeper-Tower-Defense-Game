@@ -27,10 +27,7 @@ namespace Game.Modes
         private List<EnemySpawn> _enemySpawnsForCurrentWave = new List<EnemySpawn>();
 
 
-        private Vector3 FindRandomSpawnPoint()
-        {
-            return Vector3.zero;
-        }
+
 
         #region Abstract Methods
         public override void GameModeUpdate()
@@ -70,6 +67,7 @@ namespace Game.Modes
 
         private async UniTaskVoid Wave()
         {
+            GameManager.instance.ShowTitle($"Wave {wave} !", Color.red);
             _enemyCount = 0;
             await UniTask.WaitForSeconds(_pauseTime);
 
@@ -106,7 +104,7 @@ namespace Game.Modes
                 }
             }
 
-            var enemy = Instantiate(prefab, FindRandomSpawnPoint(), Quaternion.identity);
+            var enemy = Instantiate(prefab, GameManager.instance.GetRandomSpawnPoint(), Quaternion.identity);
             enemy.onDeath += DecreaseEnemyCount;
             enemy.target = DefendingObject.instance;
             _enemyCount++;
